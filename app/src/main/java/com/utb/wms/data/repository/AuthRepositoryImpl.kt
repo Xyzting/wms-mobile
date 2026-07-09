@@ -1,6 +1,7 @@
 package com.utb.wms.data.repository
 
 import com.utb.wms.data.local.dao.UserDao
+import com.utb.wms.data.local.mapper.toDomain
 import com.utb.wms.domain.model.User
 import com.utb.wms.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,10 +17,13 @@ class AuthRepositoryImpl(
     override val currentUser: StateFlow<User?> = _currentUser.asStateFlow()
 
     override suspend fun login(username: String, password: String): User? {
-        TODO("BE-2: cocokkan password, tolak user non-aktif, isi _currentUser")
+        val baris = userDao.findByUsername(username) ?: return null
+        if (!baris.user.aktif) return null
+        if (baris.user.password != password) return null
+        return baris.toDomain().also { _currentUser.value = it }
     }
 
     override fun logout() {
-        TODO("BE-2: kosongkan _currentUser")
+        _currentUser.value = null
     }
 }
