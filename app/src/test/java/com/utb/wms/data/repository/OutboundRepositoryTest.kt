@@ -3,11 +3,9 @@ package com.utb.wms.data.repository
 import com.utb.wms.data.local.entity.StockEntity
 import com.utb.wms.domain.model.DocumentStatus
 import com.utb.wms.domain.model.GoodsIssueDetail
-import com.utb.wms.domain.model.Item
-import com.utb.wms.domain.model.Location
 import com.utb.wms.domain.model.MovementType
-import com.utb.wms.domain.model.Role
-import com.utb.wms.domain.model.User
+import com.utb.wms.domain.repository.DocumentResult
+import com.utb.wms.domain.repository.OutboundRepository
 import com.utb.wms.domain.repository.OutboundResult
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -16,131 +14,161 @@ import org.junit.Test
 
 class OutboundRepositoryTest {
 
-    private val item = Item(sku = "BOLT-M8-30", nama = "Bolt M8x30mm", satuan = "pcs", stokMinimum = 50)
-    private val lokasi = Location(kode = "A-01", nama = "Rak A-01", kapasitas = 500)
-    private val operator = User(
-        id = "U-02",
-        username = "operator",
-        password = "operator123",
-        nama = "Budi Santoso",
-        role = Role(id = "R-02", namaRole = "Operator"),
+    private val stockDao = FakeStockDao(
+        listOf(StockEntity("STK-1", Contoh.item.sku, Contoh.lokasi.kode, 100)),
     )
-    private val tanggal = 1_720_000_000_000L
+    private val movementDao = FakeMovementDao()
+    private val issueDao = FakeGoodsIssueDao()
 
-    private fun stokAwal(jumlah: Int) =
-        FakeStockDao(listOf(StockEntity("STK-1", item.sku, lokasi.kode, jumlah)))
+    private val repository: OutboundRepository = OutboundRepositoryImpl(
+        transactionRunner = FakeTransactionRunner(),
+        goodsIssueDao = issueDao,
+        stockDao = stockDao,
+        movementDao = movementDao,
+        waktu = Contoh.jam,
+    )
+
+    private suspend fun buatDraft(qty: Int = 30): String {
+        val hasil = repository.createGoodsIssue(
+            tujuan = "Produksi Lini 2",
+            operator = Contoh.operator,
+            details = listOf(GoodsIssueDetail(Contoh.item, Contoh.lokasi, qty)),
+            tanggal = Contoh.TANGGAL,
+        )
+        return (hasil as OutboundResult.Success).issue.id
+    }
 
     @Test
-    fun `pengeluaran barang mengurangi stok dan mencatat pergerakan`() = runTest {
-        val stockDao = stokAwal(100)
-        val movementDao = FakeMovementDao()
-        val issueDao = FakeGoodsIssueDao()
-        val repository = OutboundRepositoryImpl(
-            transactionRunner = FakeTransactionRunner(),
-            goodsIssueDao = issueDao,
-            stockDao = stockDao,
-            movementDao = movementDao,
-        )
-
+    fun `pengeluaran baru berstatus draft dan belum mengurangi stok`() = runTest {
         val hasil = repository.createGoodsIssue(
-            tujuan = "Produksi Line A",
-            operator = operator,
-            details = listOf(GoodsIssueDetail(item, lokasi, 30)),
-            tanggal = tanggal,
+            tujuan = "Produksi Lini 2",
+            operator = Contoh.operator,
+            details = listOf(GoodsIssueDetail(Contoh.item, Contoh.lokasi, 30)),
+            tanggal = Contoh.TANGGAL,
         )
 
         assertTrue(hasil is OutboundResult.Success)
         val issue = (hasil as OutboundResult.Success).issue
         assertEquals("GI-0001", issue.noIssue)
-        assertEquals(DocumentStatus.POSTED, issue.status)
-
-        assertEquals(70, stockDao.find(item.sku, lokasi.kode)?.jumlahStok ?: 0)
-        assertEquals(1, movementDao.baris.size)
-        assertEquals(MovementType.OUTBOUND, movementDao.baris.first().tipe)
-        assertEquals("GI-0001", movementDao.baris.first().referensi)
-        assertEquals(1, issueDao.header.size)
+        assertEquals(DocumentStatus.DRAFT, issue.status)
+        assertEquals(100, stockDao.find(Contoh.item.sku, Contoh.lokasi.kode)?.jumlahStok)
+        assertTrue(movementDao.baris.isEmpty())
     }
 
     @Test
-    fun `stok kurang menolak dokumen tanpa menulis apa pun`() = runTest {
-        val stockDao = stokAwal(100)
-        val movementDao = FakeMovementDao()
-        val issueDao = FakeGoodsIssueDao()
-        val repository = OutboundRepositoryImpl(
-            transactionRunner = FakeTransactionRunner(),
-            goodsIssueDao = issueDao,
-            stockDao = stockDao,
-            movementDao = movementDao,
-        )
+    fun `detail kosong ditolak`() = runTest {
+        val gagal = runCatching {
+            repository.createGoodsIssue(
+                tujuan = "Produksi Lini 2",
+                operator = Contoh.operator,
+                details = emptyList(),
+                tanggal = Contoh.TANGGAL,
+            )
+        }
 
-        val hasil = repository.createGoodsIssue(
-            tujuan = "Produksi Line A",
-            operator = operator,
-            details = listOf(GoodsIssueDetail(item, lokasi, 150)),
-            tanggal = tanggal,
-        )
-
-        assertTrue(hasil is OutboundResult.InsufficientStock)
-        val kurang = hasil as OutboundResult.InsufficientStock
-        assertEquals(item.sku, kurang.sku)
-        assertEquals(100, kurang.tersedia)
-        assertEquals(150, kurang.diminta)
-
-        assertEquals(100, stockDao.find(item.sku, lokasi.kode)?.jumlahStok ?: 0)
-        assertEquals(0, movementDao.baris.size)
-        assertEquals(0, issueDao.header.size)
-        assertEquals(0, issueDao.detail.size)
+        assertTrue(gagal.exceptionOrNull() is IllegalArgumentException)
     }
 
     @Test
-    fun `dua baris pada sku dan lokasi sama dijumlahkan sebelum diperiksa`() = runTest {
-        val stockDao = stokAwal(100)
-        val movementDao = FakeMovementDao()
-        val issueDao = FakeGoodsIssueDao()
-        val repository = OutboundRepositoryImpl(
-            transactionRunner = FakeTransactionRunner(),
-            goodsIssueDao = issueDao,
-            stockDao = stockDao,
-            movementDao = movementDao,
-        )
+    fun `kuantitas nol ditolak`() = runTest {
+        val gagal = runCatching {
+            repository.createGoodsIssue(
+                tujuan = "Produksi Lini 2",
+                operator = Contoh.operator,
+                details = listOf(GoodsIssueDetail(Contoh.item, Contoh.lokasi, 0)),
+                tanggal = Contoh.TANGGAL,
+            )
+        }
 
+        assertTrue(gagal.exceptionOrNull() is IllegalArgumentException)
+    }
+
+    @Test
+    fun `posting dari validated mengurangi stok dan mencatat pergerakan`() = runTest {
+        val id = buatDraft(qty = 30)
+        repository.validateGoodsIssue(id, Contoh.supervisor)
+
+        val hasil = repository.postGoodsIssue(id, Contoh.TANGGAL)
+
+        assertEquals(DocumentResult.Success(id, DocumentStatus.POSTED), hasil)
+        assertEquals(70, stockDao.find(Contoh.item.sku, Contoh.lokasi.kode)?.jumlahStok)
+
+        val pergerakan = movementDao.baris.single()
+        assertEquals(MovementType.OUTBOUND, pergerakan.tipe)
+        assertEquals(30, pergerakan.qty)
+        assertEquals("GI-0001", pergerakan.referensi)
+        assertEquals(Contoh.operator.id, pergerakan.operatorId)
+    }
+
+    @Test
+    fun `posting saat stok kurang tidak menulis apa pun`() = runTest {
+        val id = buatDraft(qty = 150)
+        repository.validateGoodsIssue(id, Contoh.supervisor)
+
+        val hasil = repository.postGoodsIssue(id, Contoh.TANGGAL)
+
+        assertEquals(DocumentResult.InsufficientStock(Contoh.item.sku, 100, 150), hasil)
+        assertEquals(100, stockDao.find(Contoh.item.sku, Contoh.lokasi.kode)?.jumlahStok)
+        assertTrue(movementDao.baris.isEmpty())
+        assertEquals(DocumentStatus.VALIDATED, issueDao.header.single().status)
+    }
+
+    @Test
+    fun `kebutuhan dijumlahkan lebih dulu untuk sku dan lokasi yang sama`() = runTest {
         val hasil = repository.createGoodsIssue(
-            tujuan = "Produksi Line A",
-            operator = operator,
+            tujuan = "Produksi Lini 2",
+            operator = Contoh.operator,
             details = listOf(
-                GoodsIssueDetail(item, lokasi, 60),
-                GoodsIssueDetail(item, lokasi, 60),
+                GoodsIssueDetail(Contoh.item, Contoh.lokasi, 60),
+                GoodsIssueDetail(Contoh.item, Contoh.lokasi, 60),
             ),
-            tanggal = tanggal,
+            tanggal = Contoh.TANGGAL,
         )
+        val id = (hasil as OutboundResult.Success).issue.id
+        repository.validateGoodsIssue(id, Contoh.supervisor)
 
-        assertTrue(hasil is OutboundResult.InsufficientStock)
-        val kurang = hasil as OutboundResult.InsufficientStock
-        assertEquals(100, kurang.tersedia)
-        assertEquals(120, kurang.diminta)
+        val posting = repository.postGoodsIssue(id, Contoh.TANGGAL)
 
-        assertEquals(100, stockDao.find(item.sku, lokasi.kode)?.jumlahStok ?: 0)
-        assertEquals(0, movementDao.baris.size)
+        assertEquals(DocumentResult.InsufficientStock(Contoh.item.sku, 100, 120), posting)
+        assertEquals(100, stockDao.find(Contoh.item.sku, Contoh.lokasi.kode)?.jumlahStok)
+        assertTrue(movementDao.baris.isEmpty())
     }
 
     @Test
-    fun `pengeluaran tepat sejumlah stok diperbolehkan`() = runTest {
-        val stockDao = stokAwal(100)
-        val repository = OutboundRepositoryImpl(
-            transactionRunner = FakeTransactionRunner(),
-            goodsIssueDao = FakeGoodsIssueDao(),
-            stockDao = stockDao,
-            movementDao = FakeMovementDao(),
-        )
+    fun `posting langsung dari draft ditolak`() = runTest {
+        val id = buatDraft()
 
-        val hasil = repository.createGoodsIssue(
-            tujuan = "Produksi Line A",
-            operator = operator,
-            details = listOf(GoodsIssueDetail(item, lokasi, 100)),
-            tanggal = tanggal,
-        )
+        val hasil = repository.postGoodsIssue(id, Contoh.TANGGAL)
 
-        assertTrue(hasil is OutboundResult.Success)
-        assertEquals(0, stockDao.find(item.sku, lokasi.kode)?.jumlahStok ?: 0)
+        assertEquals(
+            DocumentResult.InvalidTransition(DocumentStatus.DRAFT, DocumentStatus.POSTED),
+            hasil,
+        )
+        assertEquals(100, stockDao.find(Contoh.item.sku, Contoh.lokasi.kode)?.jumlahStok)
+    }
+
+    @Test
+    fun `pembatalan dari validated mempertahankan penyetuju`() = runTest {
+        val id = buatDraft()
+        repository.validateGoodsIssue(id, Contoh.supervisor)
+
+        val hasil = repository.cancelGoodsIssue(id, catatan = "Permintaan dibatalkan")
+
+        assertEquals(DocumentResult.Success(id, DocumentStatus.CANCELLED), hasil)
+        val header = issueDao.header.single()
+        assertEquals(DocumentStatus.CANCELLED, header.status)
+        assertEquals(Contoh.supervisor.id, header.approvedBy)
+        assertEquals(Contoh.WAKTU_SETUJU, header.approvedAt)
+        assertEquals("Permintaan dibatalkan", header.catatan)
+        assertEquals(100, stockDao.find(Contoh.item.sku, Contoh.lokasi.kode)?.jumlahStok)
+    }
+
+    @Test
+    fun `dokumen yang tidak dikenal menghasilkan not found`() = runTest {
+        assertEquals(DocumentResult.NotFound, repository.postGoodsIssue("GI-999", Contoh.TANGGAL))
+        assertEquals(
+            DocumentResult.NotFound,
+            repository.validateGoodsIssue("GI-999", Contoh.supervisor),
+        )
     }
 }

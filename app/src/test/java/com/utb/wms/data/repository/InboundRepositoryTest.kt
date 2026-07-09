@@ -3,103 +3,180 @@ package com.utb.wms.data.repository
 import com.utb.wms.data.local.entity.StockEntity
 import com.utb.wms.domain.model.DocumentStatus
 import com.utb.wms.domain.model.GoodsReceiptDetail
-import com.utb.wms.domain.model.Item
-import com.utb.wms.domain.model.Location
 import com.utb.wms.domain.model.MovementType
-import com.utb.wms.domain.model.Role
-import com.utb.wms.domain.model.Supplier
-import com.utb.wms.domain.model.User
+import com.utb.wms.domain.repository.DocumentResult
+import com.utb.wms.domain.repository.InboundRepository
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class InboundRepositoryTest {
 
-    private val item = Item(sku = "BOLT-M8-30", nama = "Bolt M8x30mm", satuan = "pcs", stokMinimum = 50)
-    private val lokasi = Location(kode = "A-01", nama = "Rak A-01", kapasitas = 500)
-    private val supplier = Supplier(id = "SUP-001", nama = "PT Sumber Makmur")
-    private val operator = User(
-        id = "U-02",
-        username = "operator",
-        password = "operator123",
-        nama = "Budi Santoso",
-        role = Role(id = "R-02", namaRole = "Operator"),
+    private val stockDao = FakeStockDao(
+        listOf(StockEntity("STK-1", Contoh.item.sku, Contoh.lokasi.kode, 100)),
     )
-    private val tanggal = 1_720_000_000_000L
+    private val movementDao = FakeMovementDao()
+    private val receiptDao = FakeGoodsReceiptDao()
+
+    private val repository: InboundRepository = InboundRepositoryImpl(
+        transactionRunner = FakeTransactionRunner(),
+        goodsReceiptDao = receiptDao,
+        stockDao = stockDao,
+        movementDao = movementDao,
+        waktu = Contoh.jam,
+    )
+
+    private val detail = listOf(GoodsReceiptDetail(Contoh.item, Contoh.lokasi, 20))
+
+    private suspend fun buatDraft() = repository.createGoodsReceipt(
+        supplier = Contoh.supplier,
+        operator = Contoh.operator,
+        details = detail,
+        tanggal = Contoh.TANGGAL,
+    )
 
     @Test
-    fun `penerimaan barang menambah stok dan mencatat pergerakan`() = runTest {
-        val stockDao = FakeStockDao(listOf(StockEntity("STK-1", item.sku, lokasi.kode, 100)))
-        val movementDao = FakeMovementDao()
-        val receiptDao = FakeGoodsReceiptDao()
-        val repository = InboundRepositoryImpl(
-            transactionRunner = FakeTransactionRunner(),
-            goodsReceiptDao = receiptDao,
-            stockDao = stockDao,
-            movementDao = movementDao,
-        )
-
-        val receipt = repository.createGoodsReceipt(
-            supplier = supplier,
-            operator = operator,
-            details = listOf(GoodsReceiptDetail(item, lokasi, 20)),
-            tanggal = tanggal,
-        )
+    fun `penerimaan baru berstatus draft dan belum menyentuh stok`() = runTest {
+        val receipt = buatDraft()
 
         assertEquals("GR-0001", receipt.noReceipt)
-        assertEquals(DocumentStatus.POSTED, receipt.status)
-        assertEquals(120, stockDao.find(item.sku, lokasi.kode)?.jumlahStok ?: 0)
-
-        assertEquals(1, movementDao.baris.size)
-        val pergerakan = movementDao.baris.first()
-        assertEquals(MovementType.INBOUND, pergerakan.tipe)
-        assertEquals(20, pergerakan.qty)
-        assertEquals("GR-0001", pergerakan.referensi)
-
+        assertEquals(DocumentStatus.DRAFT, receipt.status)
+        assertEquals(100, stockDao.find(Contoh.item.sku, Contoh.lokasi.kode)?.jumlahStok)
+        assertTrue(movementDao.baris.isEmpty())
         assertEquals(1, receiptDao.header.size)
         assertEquals(1, receiptDao.detail.size)
     }
 
     @Test
-    fun `penerimaan pada lokasi tanpa stok membuat baris stok baru`() = runTest {
-        val stockDao = FakeStockDao()
-        val repository = InboundRepositoryImpl(
-            transactionRunner = FakeTransactionRunner(),
-            goodsReceiptDao = FakeGoodsReceiptDao(),
-            stockDao = stockDao,
-            movementDao = FakeMovementDao(),
-        )
-
-        repository.createGoodsReceipt(
-            supplier = supplier,
-            operator = operator,
-            details = listOf(GoodsReceiptDetail(item, lokasi, 35)),
-            tanggal = tanggal,
-        )
-
-        assertEquals(1, stockDao.baris.size)
-        assertEquals(35, stockDao.find(item.sku, lokasi.kode)?.jumlahStok ?: 0)
-    }
-
-    @Test
     fun `detail kosong ditolak`() = runTest {
-        val repository = InboundRepositoryImpl(
-            transactionRunner = FakeTransactionRunner(),
-            goodsReceiptDao = FakeGoodsReceiptDao(),
-            stockDao = FakeStockDao(),
-            movementDao = FakeMovementDao(),
-        )
-
         val gagal = runCatching {
             repository.createGoodsReceipt(
-                supplier = supplier,
-                operator = operator,
+                supplier = Contoh.supplier,
+                operator = Contoh.operator,
                 details = emptyList(),
-                tanggal = tanggal,
+                tanggal = Contoh.TANGGAL,
             )
         }
 
         assertTrue(gagal.exceptionOrNull() is IllegalArgumentException)
+    }
+
+    @Test
+    fun `validasi dari draft menyimpan penyetuju dan tidak menggerakkan stok`() = runTest {
+        val receipt = buatDraft()
+
+        val hasil = repository.validateGoodsReceipt(receipt.id, Contoh.supervisor)
+
+        assertEquals(DocumentResult.Success(receipt.id, DocumentStatus.VALIDATED), hasil)
+        val header = receiptDao.header.single()
+        assertEquals(DocumentStatus.VALIDATED, header.status)
+        assertEquals(Contoh.supervisor.id, header.approvedBy)
+        assertEquals(Contoh.WAKTU_SETUJU, header.approvedAt)
+        assertEquals(100, stockDao.find(Contoh.item.sku, Contoh.lokasi.kode)?.jumlahStok)
+        assertTrue(movementDao.baris.isEmpty())
+    }
+
+    @Test
+    fun `posting dari validated menambah stok dan mencatat pergerakan`() = runTest {
+        val receipt = buatDraft()
+        repository.validateGoodsReceipt(receipt.id, Contoh.supervisor)
+
+        val hasil = repository.postGoodsReceipt(receipt.id, Contoh.TANGGAL)
+
+        assertEquals(DocumentResult.Success(receipt.id, DocumentStatus.POSTED), hasil)
+        assertEquals(120, stockDao.find(Contoh.item.sku, Contoh.lokasi.kode)?.jumlahStok)
+
+        val pergerakan = movementDao.baris.single()
+        assertEquals(MovementType.INBOUND, pergerakan.tipe)
+        assertEquals(20, pergerakan.qty)
+        assertEquals("GR-0001", pergerakan.referensi)
+        assertEquals(Contoh.operator.id, pergerakan.operatorId)
+
+        val header = receiptDao.header.single()
+        assertEquals(DocumentStatus.POSTED, header.status)
+        assertEquals(Contoh.supervisor.id, header.approvedBy)
+        assertEquals(Contoh.WAKTU_SETUJU, header.approvedAt)
+    }
+
+    @Test
+    fun `posting pada lokasi tanpa baris stok membuat baris baru`() = runTest {
+        val receipt = repository.createGoodsReceipt(
+            supplier = Contoh.supplier,
+            operator = Contoh.operator,
+            details = listOf(GoodsReceiptDetail(Contoh.itemKedua, Contoh.lokasiKedua, 35)),
+            tanggal = Contoh.TANGGAL,
+        )
+        repository.validateGoodsReceipt(receipt.id, Contoh.supervisor)
+
+        repository.postGoodsReceipt(receipt.id, Contoh.TANGGAL)
+
+        assertEquals(2, stockDao.baris.size)
+        assertEquals(35, stockDao.find(Contoh.itemKedua.sku, Contoh.lokasiKedua.kode)?.jumlahStok)
+    }
+
+    @Test
+    fun `posting langsung dari draft ditolak`() = runTest {
+        val receipt = buatDraft()
+
+        val hasil = repository.postGoodsReceipt(receipt.id, Contoh.TANGGAL)
+
+        assertEquals(
+            DocumentResult.InvalidTransition(DocumentStatus.DRAFT, DocumentStatus.POSTED),
+            hasil,
+        )
+        assertEquals(100, stockDao.find(Contoh.item.sku, Contoh.lokasi.kode)?.jumlahStok)
+        assertTrue(movementDao.baris.isEmpty())
+    }
+
+    @Test
+    fun `validasi ulang dokumen yang sudah posted ditolak`() = runTest {
+        val receipt = buatDraft()
+        repository.validateGoodsReceipt(receipt.id, Contoh.supervisor)
+        repository.postGoodsReceipt(receipt.id, Contoh.TANGGAL)
+
+        val hasil = repository.validateGoodsReceipt(receipt.id, Contoh.supervisor)
+
+        assertEquals(
+            DocumentResult.InvalidTransition(DocumentStatus.POSTED, DocumentStatus.VALIDATED),
+            hasil,
+        )
+    }
+
+    @Test
+    fun `pembatalan dari draft mengubah status menjadi cancelled`() = runTest {
+        val receipt = buatDraft()
+
+        val hasil = repository.cancelGoodsReceipt(receipt.id, catatan = "Salah pemasok")
+
+        assertEquals(DocumentResult.Success(receipt.id, DocumentStatus.CANCELLED), hasil)
+        val header = receiptDao.header.single()
+        assertEquals(DocumentStatus.CANCELLED, header.status)
+        assertEquals("Salah pemasok", header.catatan)
+        assertNull(header.approvedBy)
+        assertTrue(movementDao.baris.isEmpty())
+    }
+
+    @Test
+    fun `pembatalan dokumen yang sudah posted ditolak`() = runTest {
+        val receipt = buatDraft()
+        repository.validateGoodsReceipt(receipt.id, Contoh.supervisor)
+        repository.postGoodsReceipt(receipt.id, Contoh.TANGGAL)
+
+        val hasil = repository.cancelGoodsReceipt(receipt.id)
+
+        assertEquals(
+            DocumentResult.InvalidTransition(DocumentStatus.POSTED, DocumentStatus.CANCELLED),
+            hasil,
+        )
+        assertEquals(120, stockDao.find(Contoh.item.sku, Contoh.lokasi.kode)?.jumlahStok)
+    }
+
+    @Test
+    fun `dokumen yang tidak dikenal menghasilkan not found`() = runTest {
+        assertEquals(DocumentResult.NotFound, repository.postGoodsReceipt("GR-999", Contoh.TANGGAL))
+        assertEquals(DocumentResult.NotFound, repository.cancelGoodsReceipt("GR-999"))
+        assertNull(repository.findGoodsReceipt("GR-999"))
     }
 }
