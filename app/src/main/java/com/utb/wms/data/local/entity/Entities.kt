@@ -36,12 +36,17 @@ data class SupplierEntity(
     val isActive: Boolean,
 )
 
-@Entity(tableName = "items")
+@Entity(
+    tableName = "items",
+    indices = [Index(value = ["barcode"], unique = true)],
+)
 data class ItemEntity(
     @PrimaryKey val sku: String,
     val nama: String,
     val satuan: String,
     val stokMinimum: Int,
+    val barcode: String? = null,
+    val isActive: Boolean = true,
 )
 
 @Entity(tableName = "locations")
@@ -49,6 +54,7 @@ data class LocationEntity(
     @PrimaryKey val kode: String,
     val nama: String,
     val kapasitas: Int,
+    val isActive: Boolean = true,
 )
 
 @Entity(
@@ -70,6 +76,8 @@ data class StockEntity(
     indices = [
         Index(value = ["sku"]),
         Index(value = ["locationKode"]),
+        Index(value = ["operatorId"]),
+        Index(value = ["tanggal"]),
     ],
 )
 data class StockMovementEntity(
@@ -80,6 +88,8 @@ data class StockMovementEntity(
     val qty: Int,
     val tanggal: Long,
     val referensi: String,
+    val keterangan: String? = null,
+    val operatorId: String? = null,
 )
 
 @Entity(
@@ -88,6 +98,8 @@ data class StockMovementEntity(
         Index(value = ["noReceipt"], unique = true),
         Index(value = ["supplierId"]),
         Index(value = ["operatorId"]),
+        Index(value = ["approvedBy"]),
+        Index(value = ["status"]),
     ],
 )
 data class GoodsReceiptEntity(
@@ -97,11 +109,18 @@ data class GoodsReceiptEntity(
     val supplierId: String,
     val operatorId: String,
     val status: DocumentStatus,
+    val approvedBy: String? = null,
+    val approvedAt: Long? = null,
+    val catatan: String? = null,
 )
 
 @Entity(
     tableName = "goods_receipt_details",
-    indices = [Index(value = ["receiptId"])],
+    indices = [
+        Index(value = ["receiptId"]),
+        Index(value = ["sku"]),
+        Index(value = ["locationKode"]),
+    ],
 )
 data class GoodsReceiptDetailEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
@@ -116,6 +135,8 @@ data class GoodsReceiptDetailEntity(
     indices = [
         Index(value = ["noIssue"], unique = true),
         Index(value = ["operatorId"]),
+        Index(value = ["approvedBy"]),
+        Index(value = ["status"]),
     ],
 )
 data class GoodsIssueEntity(
@@ -125,11 +146,18 @@ data class GoodsIssueEntity(
     val tujuan: String,
     val operatorId: String,
     val status: DocumentStatus,
+    val approvedBy: String? = null,
+    val approvedAt: Long? = null,
+    val catatan: String? = null,
 )
 
 @Entity(
     tableName = "goods_issue_details",
-    indices = [Index(value = ["issueId"])],
+    indices = [
+        Index(value = ["issueId"]),
+        Index(value = ["sku"]),
+        Index(value = ["locationKode"]),
+    ],
 )
 data class GoodsIssueDetailEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,

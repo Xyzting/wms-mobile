@@ -12,8 +12,10 @@ import com.utb.wms.domain.model.GoodsIssue
 import com.utb.wms.domain.model.GoodsIssueDetail
 import com.utb.wms.domain.model.MovementType
 import com.utb.wms.domain.model.User
+import com.utb.wms.domain.repository.DocumentResult
 import com.utb.wms.domain.repository.OutboundRepository
 import com.utb.wms.domain.repository.OutboundResult
+import kotlinx.coroutines.flow.Flow
 
 class OutboundRepositoryImpl(
     private val transactionRunner: TransactionRunner,
@@ -103,4 +105,32 @@ class OutboundRepositoryImpl(
             )
         }
     }
+
+    override fun observeGoodsIssues(): Flow<List<GoodsIssue>> =
+        TODO("BE-2: pakai goodsIssueDao.observeIssues()")
+
+    override fun observeGoodsIssuesByStatus(status: DocumentStatus): Flow<List<GoodsIssue>> =
+        TODO("BE-2: pakai goodsIssueDao.observeIssuesByStatus(status)")
+
+    override suspend fun findGoodsIssue(id: String): GoodsIssue? =
+        TODO("BE-2: pakai goodsIssueDao.findById(id)")
+
+    override suspend fun validateGoodsIssue(
+        id: String,
+        approver: User,
+        catatan: String?,
+    ): DocumentResult = TODO(
+        "BE-2: cermin dari validateGoodsReceipt. Kecukupan stok belum diperiksa di sini.",
+    )
+
+    override suspend fun postGoodsIssue(id: String, tanggal: Long): DocumentResult = TODO(
+        "BE-2: hanya dari VALIDATED. Periksa kecukupan stok tiap pasangan sku dan lokasi " +
+            "lebih dulu, kembalikan InsufficientStock tanpa menulis apa pun bila kurang. " +
+            "Bila cukup, kurangi stok, catat StockMovement bertipe OUTBOUND, " +
+            "lalu ubah status menjadi POSTED.",
+    )
+
+    override suspend fun cancelGoodsIssue(id: String, catatan: String?): DocumentResult = TODO(
+        "BE-2: cermin dari cancelGoodsReceipt.",
+    )
 }

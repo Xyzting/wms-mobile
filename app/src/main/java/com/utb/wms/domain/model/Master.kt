@@ -26,10 +26,13 @@ data class Item(
     val nama: String,
     val satuan: String,
     val stokMinimum: Int = 0,
+    val barcode: String? = null,
+    val isActive: Boolean = true,
 )
 
 data class Location(
     val kode: String,
     val nama: String,
     val kapasitas: Int,
+    val isActive: Boolean = true,
 )

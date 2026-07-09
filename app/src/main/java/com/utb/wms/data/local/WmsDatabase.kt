@@ -37,7 +37,7 @@ import com.utb.wms.data.local.entity.UserEntity
         GoodsIssueEntity::class,
         GoodsIssueDetailEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = false,
 )
 @TypeConverters(Converters::class)

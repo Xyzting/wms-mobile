@@ -14,7 +14,9 @@ import com.utb.wms.domain.model.GoodsReceiptDetail
 import com.utb.wms.domain.model.MovementType
 import com.utb.wms.domain.model.Supplier
 import com.utb.wms.domain.model.User
+import com.utb.wms.domain.repository.DocumentResult
 import com.utb.wms.domain.repository.InboundRepository
+import kotlinx.coroutines.flow.Flow
 
 class InboundRepositoryImpl(
     private val transactionRunner: TransactionRunner,
@@ -92,4 +94,34 @@ class InboundRepositoryImpl(
             )
         }
     }
+
+    override fun observeGoodsReceipts(): Flow<List<GoodsReceipt>> =
+        TODO("BE-2: pakai goodsReceiptDao.observeReceipts()")
+
+    override fun observeGoodsReceiptsByStatus(status: DocumentStatus): Flow<List<GoodsReceipt>> =
+        TODO("BE-2: pakai goodsReceiptDao.observeReceiptsByStatus(status)")
+
+    override suspend fun findGoodsReceipt(id: String): GoodsReceipt? =
+        TODO("BE-2: pakai goodsReceiptDao.findById(id)")
+
+    override suspend fun validateGoodsReceipt(
+        id: String,
+        approver: User,
+        catatan: String?,
+    ): DocumentResult = TODO(
+        "BE-2: NotFound bila dokumen tidak ada. Tolak dengan InvalidTransition bila " +
+            "status.bolehPindahKe(VALIDATED) bernilai false. Simpan approver dan waktu setuju. " +
+            "Stok tidak bergerak di sini.",
+    )
+
+    override suspend fun postGoodsReceipt(id: String, tanggal: Long): DocumentResult = TODO(
+        "BE-2: hanya dari VALIDATED. Dalam satu transaksi, tambah stok tiap baris detail " +
+            "dan catat StockMovement bertipe INBOUND dengan referensi noReceipt, " +
+            "lalu ubah status menjadi POSTED.",
+    )
+
+    override suspend fun cancelGoodsReceipt(id: String, catatan: String?): DocumentResult = TODO(
+        "BE-2: hanya dari DRAFT atau VALIDATED. Dokumen POSTED tidak boleh dibatalkan " +
+            "karena stok sudah bergerak.",
+    )
 }
