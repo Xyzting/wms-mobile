@@ -14,18 +14,19 @@ arsitektur **MVVM + Repository**, dan persistensi **Room**.
 Ganti baris video demo dengan format `[Tonton di YouTube](https://...)` setelah
 tautannya siap.
 
-## Fitur (target MVP)
+## Fitur
 
-| Fitur | Keterangan | Status |
-|---|---|---|
-| Login | Autentikasi dengan akun demo | Rangka |
-| Dashboard | Menu utama | Rangka |
-| Penerimaan Barang | Goods Receipt multi-baris, menambah stok | Rangka |
-| Pengeluaran Barang | Goods Issue, validasi ketersediaan stok | Rangka |
-| Stok Gudang | Saldo stok + penanda stok minimum | Rangka |
+| Fitur | Keterangan |
+|---|---|
+| Login | Autentikasi dengan akun demo |
+| Dashboard | Menu utama, menampilkan nama dan role pengguna |
+| Penerimaan Barang | Goods Receipt multi-baris, menambah stok |
+| Pengeluaran Barang | Goods Issue, menolak dokumen bila stok tidak mencukupi |
+| Stok Gudang | Saldo stok tiap lokasi + penanda stok minimum |
 
-Kelima layar sudah punya rute navigasi dan tampil sebagai layar sementara.
-Aplikasi **sudah dapat di-build dan dijalankan** meskipun isi tiap fitur belum lengkap.
+Penerimaan dan pengeluaran barang ditulis dalam satu transaksi basis data, dan
+pengeluaran memeriksa ketersediaan seluruh baris sebelum menulis apa pun,
+sehingga stok tidak pernah menjadi minus.
 
 ## Cara menjalankan
 
@@ -62,8 +63,8 @@ Paket `ui/` **tidak boleh** mengimpor `data/`.
 
 ## Pembagian kerja tim
 
-Proyek ini dikerjakan empat orang. Rincian tugas per anggota ada di
-[`docs/tugas/`](docs/tugas/), aturan kolaborasi ada di [CONTRIBUTING.md](CONTRIBUTING.md).
+Proyek ini dikerjakan empat orang. Aturan kolaborasi dan kepemilikan berkas ada
+di [CONTRIBUTING.md](CONTRIBUTING.md).
 
 | Peran | Anggota | NIM | Ruang lingkup |
 |---|---|---|---|

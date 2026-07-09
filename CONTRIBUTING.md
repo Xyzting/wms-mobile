@@ -28,12 +28,10 @@ Alamat surel di atas harus sama persis dengan salah satu surel pada
 1. Buat cabang sendiri dari `main`:
 
    ```bash
-   git switch -c feat/be-2-repository
+   git switch -c feat/dev-<nama>
    ```
 
-   Pola nama cabang: `feat/<peran>-<ringkasan>`, misalnya `feat/fe-1-login`.
-
-2. Kerjakan hanya berkas milik peran Anda (lihat [`docs/tugas/`](docs/tugas/)).
+2. Kerjakan hanya berkas milik peran Anda (lihat tabel kepemilikan di bawah).
 3. Pastikan proyek masih dapat di-build sebelum push:
 
    ```bash
@@ -49,14 +47,14 @@ Alamat surel di atas harus sama persis dengan salah satu surel pada
 Gunakan pola `<tipe>(<cakupan>): <ringkasan>` dengan huruf kecil dan kalimat
 bahasa Indonesia. Tipe yang dipakai:
 
-| Tipe | Penggunaan |
-|---|---|
-| `feat` | menambah kemampuan baru |
-| `fix` | memperbaiki kesalahan |
-| `test` | menambah atau mengubah pengujian |
-| `refactor` | merapikan kode tanpa mengubah perilaku |
-| `docs` | mengubah dokumentasi |
-| `chore` | konfigurasi, dependensi, berkas pendukung |
+| Tipe       | Penggunaan                                |
+| ---------- | ----------------------------------------- |
+| `feat`     | menambah kemampuan baru                   |
+| `fix`      | memperbaiki kesalahan                     |
+| `test`     | menambah atau mengubah pengujian          |
+| `refactor` | merapikan kode tanpa mengubah perilaku    |
+| `docs`     | mengubah dokumentasi                      |
+| `chore`    | konfigurasi, dependensi, berkas pendukung |
 
 Contoh: `feat(data): implementasi InboundRepositoryImpl`.
 
@@ -64,12 +62,12 @@ Contoh: `feat(data): implementasi InboundRepositoryImpl`.
 
 Setiap berkas dimiliki satu peran. **Jangan mengubah berkas milik peran lain.**
 
-| Peran | Anggota | Berkas |
-|---|---|---|
-| BE-1 | Reyhan Fathir Alamsyah | konfigurasi Gradle, `AndroidManifest.xml`, `res/`, `WmsApplication.kt`, `di/`, `domain/`, `data/local/`, `ui/navigation/`, `ui/common/ComingSoonScreen.kt`, `ui/common/AppContainerAccess.kt`, dokumentasi |
-| BE-2 | Nazka Yasir Alman Paluthi | `data/repository/*Impl.kt`, `app/src/test/` |
-| FE-1 | M. Hafizul Hadi | `ui/theme/`, `ui/login/`, `ui/dashboard/`, `ui/inventory/` |
-| FE-2 | Radhitias Salman Syam | `ui/common/Components.kt`, `ui/inbound/`, `ui/outbound/` |
+| Peran | Anggota                   | Berkas                                                                                                                                                                    |
+| ----- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BE-1  | Reyhan Fathir Alamsyah    | konfigurasi Gradle, `AndroidManifest.xml`, `res/`, `WmsApplication.kt`, `di/`, `domain/`, `data/local/`, `ui/navigation/`, `ui/common/AppContainerAccess.kt`, dokumentasi |
+| BE-2  | Nazka Yasir Alman Paluthi | `data/repository/*Impl.kt`, `app/src/test/`                                                                                                                               |
+| FE-1  | M. Hafizul Hadi           | `ui/theme/`, `ui/login/`, `ui/dashboard/`, `ui/inventory/`                                                                                                                |
+| FE-2  | Radhitias Salman Syam     | `ui/common/Components.kt`, `ui/inbound/`, `ui/outbound/`                                                                                                                  |
 
 ### Pengecualian yang diizinkan
 
