@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base activity theme. Colors & typography are handled by Compose MaterialTheme;
+         this only needs to be a NoActionBar theme so Compose draws the whole window. -->
+    <style name="Theme.WMSMobile" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>
