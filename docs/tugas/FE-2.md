@@ -1,5 +1,7 @@
 # FE-2 — Komponen Bersama, Penerimaan & Pengeluaran Barang
 
+**Penanggung jawab:** Radhitias Salman Syam (24552011112)
+
 ## Ruang lingkup
 
 Membangun dua layar formulir — bagian paling rumit dari sisi tampilan — beserta

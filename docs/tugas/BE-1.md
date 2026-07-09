@@ -1,5 +1,7 @@
 # BE-1 — Kerangka, Kontrak, dan Basis Data
 
+**Penanggung jawab:** Reyhan Fathir Alamsyah (24552011032)
+
 ## Ruang lingkup
 
 Menyiapkan fondasi yang dipakai tiga peran lain: konfigurasi proyek, model

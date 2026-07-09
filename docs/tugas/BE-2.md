@@ -1,5 +1,7 @@
 # BE-2 — Implementasi Repository dan Pengujian
 
+**Penanggung jawab:** Nazka Yasir Alman Paluthi (24552011087)
+
 ## Ruang lingkup
 
 Mengisi lima rangka repository yang sudah disiapkan BE-1, lalu menulis unit test

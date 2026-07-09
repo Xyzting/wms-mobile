@@ -1,5 +1,7 @@
 # FE-1 — Tema, Login, Dashboard, Stok Gudang
 
+**Penanggung jawab:** M. Hafizul Hadi (24552011218)
+
 ## Ruang lingkup
 
 Menetapkan tema visual aplikasi dan membangun tiga layar yang hanya membaca data.

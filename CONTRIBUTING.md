@@ -64,12 +64,12 @@ Contoh: `feat(data): implementasi InboundRepositoryImpl`.
 
 Setiap berkas dimiliki satu peran. **Jangan mengubah berkas milik peran lain.**
 
-| Peran | Berkas |
-|---|---|
-| BE-1 | konfigurasi Gradle, `AndroidManifest.xml`, `res/`, `WmsApplication.kt`, `di/`, `domain/`, `data/local/`, `ui/navigation/`, `ui/common/ComingSoonScreen.kt`, `ui/common/AppContainerAccess.kt`, dokumentasi |
-| BE-2 | `data/repository/*Impl.kt`, `app/src/test/` |
-| FE-1 | `ui/theme/`, `ui/login/`, `ui/dashboard/`, `ui/inventory/` |
-| FE-2 | `ui/common/Components.kt`, `ui/inbound/`, `ui/outbound/` |
+| Peran | Anggota | Berkas |
+|---|---|---|
+| BE-1 | Reyhan Fathir Alamsyah | konfigurasi Gradle, `AndroidManifest.xml`, `res/`, `WmsApplication.kt`, `di/`, `domain/`, `data/local/`, `ui/navigation/`, `ui/common/ComingSoonScreen.kt`, `ui/common/AppContainerAccess.kt`, dokumentasi |
+| BE-2 | Nazka Yasir Alman Paluthi | `data/repository/*Impl.kt`, `app/src/test/` |
+| FE-1 | M. Hafizul Hadi | `ui/theme/`, `ui/login/`, `ui/dashboard/`, `ui/inventory/` |
+| FE-2 | Radhitias Salman Syam | `ui/common/Components.kt`, `ui/inbound/`, `ui/outbound/` |
 
 ### Pengecualian yang diizinkan
 

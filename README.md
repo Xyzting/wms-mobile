@@ -4,6 +4,16 @@ Aplikasi **Warehouse Management System** versi mobile — implementasi dari desa
 OOAD (UAS OOAD, WMS). Dibangun dengan **Kotlin + Jetpack Compose (Material 3)**,
 arsitektur **MVVM + Repository**, dan persistensi **Room**.
 
+## Tautan
+
+| Sumber | Tautan |
+|---|---|
+| Video demo aplikasi | _belum tersedia_ |
+| Dokumen desain OOAD | [Buka di Google Docs](https://docs.google.com/document/d/1bBeJVVsAAmToXrQMYOm4iHlNcDzRNlTU/edit?usp=sharing) |
+
+Ganti baris video demo dengan format `[Tonton di YouTube](https://...)` setelah
+tautannya siap.
+
 ## Fitur (target MVP)
 
 | Fitur | Keterangan | Status |
@@ -55,12 +65,12 @@ Paket `ui/` **tidak boleh** mengimpor `data/`.
 Proyek ini dikerjakan empat orang. Rincian tugas per anggota ada di
 [`docs/tugas/`](docs/tugas/), aturan kolaborasi ada di [CONTRIBUTING.md](CONTRIBUTING.md).
 
-| Peran | Ruang lingkup |
-|---|---|
-| BE-1 | Kerangka proyek, model, kontrak repository, Room, DI, navigasi |
-| BE-2 | Implementasi kontrak repository + unit test |
-| FE-1 | Tema, layar Login, Dashboard, Stok Gudang |
-| FE-2 | Komponen bersama, layar Penerimaan & Pengeluaran Barang |
+| Peran | Anggota | NIM | Ruang lingkup |
+|---|---|---|---|
+| BE-1 | Reyhan Fathir Alamsyah | 24552011032 | Kerangka proyek, model, kontrak repository, Room, DI, navigasi |
+| BE-2 | Nazka Yasir Alman Paluthi | 24552011087 | Implementasi kontrak repository + unit test |
+| FE-1 | M. Hafizul Hadi | 24552011218 | Tema, layar Login, Dashboard, Stok Gudang |
+| FE-2 | Radhitias Salman Syam | 24552011112 | Komponen bersama, layar Penerimaan & Pengeluaran Barang |
 
 ## Catatan
 
