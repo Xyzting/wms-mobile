@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ic_launcher_background">#1E5AA8</color>
+
+    <color name="putih">#FFFFFFFF</color>
+    <color name="biru_utama">#FF0B5FA5</color>
+    <color name="biru_terang">#FF6FA8DC</color>
+    <color name="biru_kontainer">#FFD3E4F3</color>
+    <color name="biru_gelap">#FF063A66</color>
+    <color name="jingga_aksen">#FFE07A1F</color>
+    <color name="jingga_kontainer">#FFFCE3C8</color>
+    <color name="abu_latar">#FFF5F7FA</color>
+    <color name="abu_teks">#FF5B6470</color>
+    <color name="merah_galat">#FFB3261E</color>
+    <color name="merah_kontainer">#FFF9DEDC</color>
+    <color name="hijau_aman">#FF2E7D32</color>
 </resources>

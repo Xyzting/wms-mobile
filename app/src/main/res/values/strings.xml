@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">WMS Mobile</string>
+
+    <string name="judul_login">Login</string>
+    <string name="judul_dashboard">Dashboard</string>
+    <string name="judul_profil">Profil Pengguna</string>
+    <string name="judul_stok">Stok Gudang</string>
+    <string name="judul_kartu_stok">Kartu Stok</string>
+    <string name="judul_penyesuaian_stok">Penyesuaian Stok</string>
+    <string name="judul_penerimaan">Penerimaan Barang</string>
+    <string name="judul_riwayat_penerimaan">Riwayat Penerimaan</string>
+    <string name="judul_pengeluaran">Pengeluaran Barang</string>
+    <string name="judul_riwayat_pengeluaran">Riwayat Pengeluaran</string>
+    <string name="judul_master_data">Master Data</string>
+    <string name="judul_katalog_barang">Katalog Barang</string>
+    <string name="judul_kelola_pengguna">Kelola Pengguna</string>
+    <string name="judul_kelola_role">Kelola Role</string>
+    <string name="judul_laporan">Laporan</string>
+
+    <string name="belum_dikerjakan">Layar ini belum dikerjakan</string>
+    <string name="penanggung_jawab">Penanggung jawab: %1$s</string>
+    <string name="ikon_dalam_pengerjaan">Ikon layar dalam pengerjaan</string>
 </resources>

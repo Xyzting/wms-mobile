@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Base activity theme. Colors & typography are handled by Compose MaterialTheme;
-         this only needs to be a NoActionBar theme so Compose draws the whole window. -->
-    <style name="Theme.WMSMobile" parent="android:Theme.Material.Light.NoActionBar" />
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.WMSMobile" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/biru_utama</item>
+        <item name="colorOnPrimary">@color/putih</item>
+        <item name="colorPrimaryContainer">@color/biru_kontainer</item>
+        <item name="colorOnPrimaryContainer">@color/biru_gelap</item>
+
+        <item name="colorSecondary">@color/jingga_aksen</item>
+        <item name="colorOnSecondary">@color/putih</item>
+        <item name="colorSecondaryContainer">@color/jingga_kontainer</item>
+        <item name="colorOnSecondaryContainer">@color/biru_gelap</item>
+
+        <item name="colorError">@color/merah_galat</item>
+        <item name="colorOnError">@color/putih</item>
+        <item name="colorErrorContainer">@color/merah_kontainer</item>
+        <item name="colorOnErrorContainer">@color/merah_galat</item>
+
+        <item name="android:statusBarColor">@color/biru_utama</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+    </style>
+
 </resources>
