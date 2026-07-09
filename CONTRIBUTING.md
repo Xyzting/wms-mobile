@@ -62,22 +62,33 @@ Contoh: `feat(data): implementasi InboundRepositoryImpl`.
 
 Setiap berkas dimiliki satu peran. **Jangan mengubah berkas milik peran lain.**
 
-| Peran | Anggota                   | Berkas                                                                                                                                                                    |
-| ----- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| BE-1  | Reyhan Fathir Alamsyah    | konfigurasi Gradle, `AndroidManifest.xml`, `res/`, `WmsApplication.kt`, `di/`, `domain/`, `data/local/`, `ui/navigation/`, `ui/common/AppContainerAccess.kt`, dokumentasi |
-| BE-2  | Nazka Yasir Alman Paluthi | `data/repository/*Impl.kt`, `app/src/test/`                                                                                                                               |
-| FE-1  | M. Hafizul Hadi           | `ui/theme/`, `ui/login/`, `ui/dashboard/`, `ui/inventory/`                                                                                                                |
-| FE-2  | Radhitias Salman Syam     | `ui/common/Components.kt`, `ui/inbound/`, `ui/outbound/`                                                                                                                  |
+| Peran | Anggota                   | Berkas                                                                                                                                                        |
+| ----- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BE-1  | Reyhan Fathir Alamsyah    | konfigurasi Gradle, `gradlew*`, `AndroidManifest.xml`, `MainActivity.kt`, `WmsApplication.kt`, `di/`, `domain/`, `data/local/`, `res/navigation/`, `res/values/`, `ui/common/AppContainerAccess.kt`, `ui/common/ComingSoonFragment.kt`, dokumentasi |
+| BE-2  | Nazka Yasir Alman Paluthi | `data/repository/*Impl.kt`, `app/src/test/`                                                                                                                   |
+| FE-1  | M. Hafizul Hadi           | `ui/theme/`, `ui/login/`, `ui/dashboard/`, `ui/profile/`, `ui/masterdata/`, `ui/catalog/`, `ui/admin/`, `ui/report/`                                          |
+| FE-2  | Radhitias Salman Syam     | `ui/common/Components.kt`, `ui/inventory/`, `ui/inbound/`, `ui/outbound/`                                                                                     |
+
+Layar Fragment membawa serta berkas tata letaknya. Pemilik `ui/login/` juga
+memiliki `res/layout/fragment_login.xml`, dan seterusnya.
+
+Sejak fase 2, `ui/inventory/` berpindah dari FE-1 ke FE-2 agar seluruh layar
+yang menyentuh saldo stok berada pada satu tangan.
 
 ### Pengecualian yang diizinkan
 
-Dua berkas milik BE-1 boleh disentuh peran lain, terbatas pada baris tertentu:
-
-- `ui/navigation/WmsNavHost.kt` — setiap peran FE hanya boleh mengubah blok
-  `composable(...)` miliknya sendiri. Blok sudah diurutkan agar milik FE-1 dan
-  FE-2 tidak bersebelahan, sehingga Git dapat menggabungkannya otomatis.
-- `MainActivity.kt` — hanya FE-1, dan hanya untuk mengganti `MaterialTheme`
-  menjadi `WMSMobileTheme` setelah `ui/theme/` selesai.
+- `res/navigation/nav_graph.xml` — milik BE-1, namun setiap peran FE mengganti
+  `android:name` pada destinasi miliknya sendiri, dari `ComingSoonFragment`
+  menjadi Fragment yang sesungguhnya, lalu menghapus dua `<argument>` bawaan
+  destinasi tersebut. Destinasi sudah diurutkan agar milik FE-1 dan FE-2 tidak
+  bersebelahan, sehingga Git dapat menggabungkannya otomatis.
+- `res/values/strings.xml` — **jangan disentuh peran FE.** Tulis teks baru pada
+  berkas sendiri: FE-1 memakai `res/values/strings_fe1.xml`, FE-2 memakai
+  `res/values/strings_fe2.xml`. Android menggabungkan seluruh berkas di
+  `res/values/` menjadi satu, jadi `R.string.*` tetap bekerja seperti biasa dan
+  tidak ada dua orang yang menulis pada berkas yang sama.
+- `app/build.gradle.kts` — milik BE-1. Bila sebuah pustaka baru dibutuhkan,
+  mintakan kepada BE-1, jangan tambahkan sendiri.
 
 ## 5. Aturan arsitektur
 
@@ -91,3 +102,15 @@ Dua berkas milik BE-1 boleh disentuh peran lain, terbatas pada baris tertentu:
   memakai `@Preview` tanpa menunggu BE-2 selesai.
 - `appContainer()` hanya boleh dipanggil dari `*Route`, tidak pernah dari layar
   yang dipratinjau `@Preview`.
+- Perpindahan antar layar hanya lewat `findNavController().navigate(R.id.action_*)`.
+  Sebuah Fragment tidak pernah membuat Fragment lain secara langsung.
+- Penyaringan menu memakai berkas `domain/model/Permission.kt`, bukan
+  perbandingan `namaRole` yang ditulis ulang di tiap layar.
+
+## 6. Selama logika repository belum terisi
+
+Rangka `data/repository/*Impl.kt` memakai `TODO("BE-2: ...")`. Berkas tersebut
+**dapat dikompilasi**, tetapi memanggilnya saat aplikasi berjalan akan
+melemparkan `NotImplementedError`. Karena itu FE dapat mulai menyusun tata letak
+dan `@Preview` lebih dahulu, dan baru menyambungkannya ke ViewModel setelah
+BE-2 menyelesaikan bagiannya.
