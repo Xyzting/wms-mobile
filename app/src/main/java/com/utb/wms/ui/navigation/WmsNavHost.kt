@@ -6,6 +6,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.utb.wms.ui.common.ComingSoonScreen
+import com.utb.wms.ui.dashboard.DashboardRoute
+import com.utb.wms.ui.inventory.InventoryRoute
+import com.utb.wms.ui.login.LoginRoute
 
 object Routes {
     const val LOGIN = "login"
@@ -24,37 +27,30 @@ fun WmsNavHost(
         startDestination = Routes.LOGIN,
     ) {
         composable(Routes.LOGIN) {
-            ComingSoonScreen(
-                judul = "Login",
-                penanggungJawab = "FE-1",
-                aksi = listOf(
-                    "Lanjut ke Dashboard" to {
-                        navController.navigate(Routes.DASHBOARD) {
-                            popUpTo(Routes.LOGIN) { inclusive = true }
-                        }
-                    },
-                ),
+            LoginRoute(
+                onLoginSuccess = {
+                    navController.navigate(Routes.DASHBOARD) {
+                        popUpTo(Routes.LOGIN) { inclusive = true }
+                    }
+                },
             )
         }
 
         composable(Routes.DASHBOARD) {
-            ComingSoonScreen(
-                judul = "Dashboard",
-                penanggungJawab = "FE-1",
-                aksi = listOf(
-                    "Penerimaan Barang" to { navController.navigate(Routes.INBOUND) },
-                    "Pengeluaran Barang" to { navController.navigate(Routes.OUTBOUND) },
-                    "Stok Gudang" to { navController.navigate(Routes.INVENTORY) },
-                ),
+            DashboardRoute(
+                onOpenInbound = { navController.navigate(Routes.INBOUND) },
+                onOpenOutbound = { navController.navigate(Routes.OUTBOUND) },
+                onOpenInventory = { navController.navigate(Routes.INVENTORY) },
+                onLogout = {
+                    navController.navigate(Routes.LOGIN) {
+                        popUpTo(0) { inclusive = true }
+                    }
+                },
             )
         }
 
         composable(Routes.INVENTORY) {
-            ComingSoonScreen(
-                judul = "Stok Gudang",
-                penanggungJawab = "FE-1",
-                onBack = { navController.popBackStack() },
-            )
+            InventoryRoute(onBack = { navController.popBackStack() })
         }
 
         composable(Routes.INBOUND) {
