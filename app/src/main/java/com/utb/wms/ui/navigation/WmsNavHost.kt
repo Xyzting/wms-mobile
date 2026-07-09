@@ -5,10 +5,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.utb.wms.ui.common.ComingSoonScreen
 import com.utb.wms.ui.dashboard.DashboardRoute
+import com.utb.wms.ui.inbound.GoodsReceiptRoute
 import com.utb.wms.ui.inventory.InventoryRoute
 import com.utb.wms.ui.login.LoginRoute
+import com.utb.wms.ui.outbound.GoodsIssueRoute
 
 object Routes {
     const val LOGIN = "login"
@@ -54,19 +55,11 @@ fun WmsNavHost(
         }
 
         composable(Routes.INBOUND) {
-            ComingSoonScreen(
-                judul = "Penerimaan Barang",
-                penanggungJawab = "FE-2",
-                onBack = { navController.popBackStack() },
-            )
+            GoodsReceiptRoute(onBack = { navController.popBackStack() })
         }
 
         composable(Routes.OUTBOUND) {
-            ComingSoonScreen(
-                judul = "Pengeluaran Barang",
-                penanggungJawab = "FE-2",
-                onBack = { navController.popBackStack() },
-            )
+            GoodsIssueRoute(onBack = { navController.popBackStack() })
         }
     }
 }
