@@ -1,17 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">#1E5AA8</color>
+    <color name="ic_launcher_background">#0B5FA5</color>
 
     <color name="putih">#FFFFFFFF</color>
+
     <color name="biru_utama">#FF0B5FA5</color>
     <color name="biru_terang">#FF6FA8DC</color>
     <color name="biru_kontainer">#FFD3E4F3</color>
+    <color name="biru_kontainer_gelap">#FF0D4A78</color>
     <color name="biru_gelap">#FF063A66</color>
+
     <color name="jingga_aksen">#FFE07A1F</color>
+    <color name="jingga_terang">#FFE9A24F</color>
     <color name="jingga_kontainer">#FFFCE3C8</color>
-    <color name="abu_latar">#FFF5F7FA</color>
-    <color name="abu_teks">#FF5B6470</color>
-    <color name="merah_galat">#FFB3261E</color>
-    <color name="merah_kontainer">#FFF9DEDC</color>
+    <color name="jingga_kontainer_gelap">#FF5A3400</color>
+    <color name="jingga_gelap">#FF3D1F00</color>
+
     <color name="hijau_aman">#FF2E7D32</color>
+    <color name="hijau_terang">#FF7BC47F</color>
+    <color name="hijau_kontainer">#FFD6EBD7</color>
+    <color name="hijau_kontainer_gelap">#FF1E5622</color>
+    <color name="hijau_gelap">#FF1B5E20</color>
+    <color name="hijau_paling_gelap">#FF0B3B12</color>
+
+    <color name="merah_galat">#FFB3261E</color>
+    <color name="merah_terang">#FFF2B8B5</color>
+    <color name="merah_kontainer">#FFF9DEDC</color>
+    <color name="merah_kontainer_gelap">#FF8C1D18</color>
+    <color name="merah_gelap">#FF601410</color>
+
+    <color name="abu_latar">#FFF5F7FA</color>
+    <color name="abu_permukaan">#FFFFFFFF</color>
+    <color name="abu_permukaan_varian">#FFE3E8EF</color>
+    <color name="abu_teks">#FF5B6470</color>
+    <color name="abu_garis">#FF8A929C</color>
+    <color name="abu_garis_redup">#FFD5DAE0</color>
+
+    <color name="malam_latar">#FF101418</color>
+    <color name="malam_permukaan">#FF171C21</color>
+    <color name="malam_permukaan_varian">#FF2A3138</color>
+    <color name="malam_teks">#FFE2E6EA</color>
+    <color name="malam_teks_varian">#FFB4BCC5</color>
+    <color name="malam_garis">#FF6C757E</color>
+    <color name="malam_garis_redup">#FF3A4149</color>
+
+    <color name="latar_toolbar">#FF0B5FA5</color>
+    <color name="teks_toolbar">#FFFFFFFF</color>
+    <color name="teks_toolbar_redup">#B3FFFFFF</color>
 </resources>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.WMS.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.WMS.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.WMS.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.WMS.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.WMS.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="ThemeOverlay.WMS.Toolbar" parent="ThemeOverlay.Material3.Toolbar.Surface">
+        <item name="colorOnSurface">@color/teks_toolbar</item>
+        <item name="colorOnSurfaceVariant">@color/teks_toolbar</item>
+        <item name="colorControlNormal">@color/teks_toolbar</item>
+    </style>
+
+    <style name="Widget.WMS.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/latar_toolbar</item>
+        <item name="titleTextColor">@color/teks_toolbar</item>
+        <item name="navigationIconTint">@color/teks_toolbar</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.WMS.Toolbar</item>
+    </style>
+
+    <style name="Widget.WMS.TabLayout" parent="Widget.Material3.TabLayout">
+        <item name="android:background">@color/latar_toolbar</item>
+        <item name="tabIndicatorColor">@color/teks_toolbar</item>
+        <item name="tabSelectedTextColor">@color/teks_toolbar</item>
+        <item name="tabTextColor">@color/teks_toolbar_redup</item>
+    </style>
+
+    <style name="Widget.WMS.CardView" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">?attr/colorOutlineVariant</item>
+    </style>
+
+    <style name="Widget.WMS.Chip.Status" parent="Widget.Material3.Chip.Assist">
+        <item name="chipStrokeWidth">0dp</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+        <item name="android:checkable">false</item>
+        <item name="android:clickable">false</item>
+    </style>
+
+</resources>
