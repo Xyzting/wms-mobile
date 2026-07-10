@@ -1,7 +1,10 @@
 package com.utb.wms.ui.login
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.utb.wms.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -54,6 +57,13 @@ class LoginViewModel(
                 _state.update { it.copy(sedangMemuat = false) }
                 onBerhasil()
             }
+        }
+    }
+
+    companion object {
+
+        fun factory(authRepository: AuthRepository): ViewModelProvider.Factory = viewModelFactory {
+            initializer { LoginViewModel(authRepository) }
         }
     }
 }

@@ -83,87 +83,39 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.utb.wms.ui.common.ComingSoonFragment"
+        android:name="com.utb.wms.ui.profile.ProfileFragment"
         android:label="@string/judul_profil">
-        <argument
-            android:name="judul"
-            android:defaultValue="@string/judul_profil"
-            app:argType="reference" />
-        <argument
-            android:name="penanggungJawab"
-            android:defaultValue="FE-1"
-            app:argType="string" />
+        <action
+            android:id="@+id/action_profile_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/masterDataFragment"
-        android:name="com.utb.wms.ui.common.ComingSoonFragment"
-        android:label="@string/judul_master_data">
-        <argument
-            android:name="judul"
-            android:defaultValue="@string/judul_master_data"
-            app:argType="reference" />
-        <argument
-            android:name="penanggungJawab"
-            android:defaultValue="FE-1"
-            app:argType="string" />
-    </fragment>
+        android:name="com.utb.wms.ui.masterdata.MasterDataFragment"
+        android:label="@string/judul_master_data" />
 
     <fragment
         android:id="@+id/itemCatalogFragment"
-        android:name="com.utb.wms.ui.common.ComingSoonFragment"
-        android:label="@string/judul_katalog_barang">
-        <argument
-            android:name="judul"
-            android:defaultValue="@string/judul_katalog_barang"
-            app:argType="reference" />
-        <argument
-            android:name="penanggungJawab"
-            android:defaultValue="FE-1"
-            app:argType="string" />
-    </fragment>
+        android:name="com.utb.wms.ui.catalog.ItemCatalogFragment"
+        android:label="@string/judul_katalog_barang" />
 
     <fragment
         android:id="@+id/userManagementFragment"
-        android:name="com.utb.wms.ui.common.ComingSoonFragment"
-        android:label="@string/judul_kelola_pengguna">
-        <argument
-            android:name="judul"
-            android:defaultValue="@string/judul_kelola_pengguna"
-            app:argType="reference" />
-        <argument
-            android:name="penanggungJawab"
-            android:defaultValue="FE-1"
-            app:argType="string" />
-    </fragment>
+        android:name="com.utb.wms.ui.admin.UserManagementFragment"
+        android:label="@string/judul_kelola_pengguna" />
 
     <fragment
         android:id="@+id/roleManagementFragment"
-        android:name="com.utb.wms.ui.common.ComingSoonFragment"
-        android:label="@string/judul_kelola_role">
-        <argument
-            android:name="judul"
-            android:defaultValue="@string/judul_kelola_role"
-            app:argType="reference" />
-        <argument
-            android:name="penanggungJawab"
-            android:defaultValue="FE-1"
-            app:argType="string" />
-    </fragment>
+        android:name="com.utb.wms.ui.admin.RoleManagementFragment"
+        android:label="@string/judul_kelola_role" />
 
     <fragment
         android:id="@+id/reportFragment"
-        android:name="com.utb.wms.ui.common.ComingSoonFragment"
-        android:label="@string/judul_laporan">
-        <argument
-            android:name="judul"
-            android:defaultValue="@string/judul_laporan"
-            app:argType="reference" />
-        <argument
-            android:name="penanggungJawab"
-            android:defaultValue="FE-1"
-            app:argType="string" />
-    </fragment>
+        android:name="com.utb.wms.ui.report.ReportFragment"
+        android:label="@string/judul_laporan" />
 
     <fragment
         android:id="@+id/stockMovementFragment"
