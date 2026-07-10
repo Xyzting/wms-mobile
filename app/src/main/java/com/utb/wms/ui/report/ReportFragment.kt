@@ -84,7 +84,10 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
             viewModel.laporanMutasi.value.mapIndexed { posisi, mutasi -> mutasi.keBaris(posisi) }
         }
         adapter.submitList(baris)
-        tampilan.textKosong.visibility = if (baris.isEmpty()) View.VISIBLE else View.GONE
+        tampilan.kosong.ikonKosong.setImageResource(R.drawable.ic_assessment)
+        tampilan.kosong.textKosongJudul.setText(R.string.laporan_kosong)
+        tampilan.kosong.textKosongKeterangan.setText(R.string.laporan_kosong_keterangan)
+        tampilan.kosong.root.visibility = if (baris.isEmpty()) View.VISIBLE else View.GONE
         tampilan.textKeterangan.visibility = if (tabStok) View.GONE else View.VISIBLE
         tampilan.textKeterangan.setText(R.string.laporan_rentang)
     }

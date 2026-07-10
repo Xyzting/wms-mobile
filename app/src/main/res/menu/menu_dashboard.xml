@@ -7,14 +7,14 @@
         android:id="@+id/aksi_profil"
         android:icon="@drawable/ic_person"
         android:title="@string/dashboard_profil"
-        app:iconTint="?attr/colorOnPrimary"
+        app:iconTint="@color/teks_toolbar"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/aksi_keluar"
         android:icon="@drawable/ic_logout"
         android:title="@string/dashboard_keluar"
-        app:iconTint="?attr/colorOnPrimary"
+        app:iconTint="@color/teks_toolbar"
         app:showAsAction="ifRoom" />
 
 </menu>

@@ -55,7 +55,10 @@ class RoleManagementFragment : Fragment(R.layout.fragment_role_management) {
             BarisRole(role, viewModel.jumlahPenggunaDenganRole(role.id))
         }
         adapter.submitList(baris)
-        tampilan.textKosong.visibility = if (baris.isEmpty()) View.VISIBLE else View.GONE
+        tampilan.kosong.ikonKosong.setImageResource(R.drawable.ic_shield)
+        tampilan.kosong.textKosongJudul.setText(R.string.role_kosong)
+        tampilan.kosong.textKosongKeterangan.setText(R.string.role_kosong_keterangan)
+        tampilan.kosong.root.visibility = if (baris.isEmpty()) View.VISIBLE else View.GONE
     }
 
     private fun formRole(lama: Role?) {
