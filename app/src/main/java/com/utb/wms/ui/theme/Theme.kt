@@ -31,6 +31,16 @@ private val SkemaTerang = lightColorScheme(
     onSurfaceVariant = AbuTeks,
     outline = AbuGaris,
     outlineVariant = AbuGarisRedup,
+    surfaceDim = AbuPermukaanRedup,
+    surfaceBright = Putih,
+    surfaceContainerLowest = Putih,
+    surfaceContainerLow = AbuPermukaanRendah,
+    surfaceContainer = AbuPermukaanKontainer,
+    surfaceContainerHigh = AbuPermukaanTinggi,
+    surfaceContainerHighest = AbuPermukaanTertinggi,
+    inverseSurface = AbuPermukaanTerbalik,
+    inverseOnSurface = AbuTeksTerbalik,
+    inversePrimary = BiruTerang,
 )
 
 private val SkemaGelap = darkColorScheme(
@@ -58,6 +68,16 @@ private val SkemaGelap = darkColorScheme(
     onSurfaceVariant = MalamTeksVarian,
     outline = MalamGaris,
     outlineVariant = MalamGarisRedup,
+    surfaceDim = MalamLatar,
+    surfaceBright = MalamPermukaanTerang,
+    surfaceContainerLowest = MalamPermukaanTerendah,
+    surfaceContainerLow = MalamPermukaan,
+    surfaceContainer = MalamPermukaanKontainer,
+    surfaceContainerHigh = MalamPermukaanTinggi,
+    surfaceContainerHighest = MalamPermukaanTertinggi,
+    inverseSurface = MalamTeks,
+    inverseOnSurface = MalamPermukaanVarian,
+    inversePrimary = BiruUtama,
 )
 
 @Composable

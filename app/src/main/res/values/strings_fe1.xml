@@ -16,8 +16,9 @@
     <string name="dashboard_bagian_inventaris">Inventaris</string>
     <string name="dashboard_bagian_administrasi">Administrasi</string>
     <string name="dashboard_bagian_laporan">Laporan</string>
-    <string name="dashboard_stok_menipis">stok di bawah minimum</string>
-    <string name="dashboard_dokumen_menunggu">dokumen menunggu persetujuan</string>
+    <string name="dashboard_stok_menipis">stok menipis</string>
+    <string name="dashboard_penerimaan_menunggu">penerimaan menunggu</string>
+    <string name="dashboard_pengeluaran_menunggu">pengeluaran menunggu</string>
     <string name="menu_penerimaan_judul">Penerimaan Barang</string>
     <string name="menu_penerimaan_keterangan">Catat barang masuk dari pemasok</string>
     <string name="menu_riwayat_penerimaan_judul">Riwayat Penerimaan</string>

@@ -30,6 +30,17 @@
         <item name="colorOnSurfaceVariant">@color/malam_teks_varian</item>
         <item name="colorOutline">@color/malam_garis</item>
         <item name="colorOutlineVariant">@color/malam_garis_redup</item>
+
+        <item name="colorSurfaceDim">@color/malam_latar</item>
+        <item name="colorSurfaceBright">@color/malam_permukaan_terang</item>
+        <item name="colorSurfaceContainerLowest">@color/malam_permukaan_terendah</item>
+        <item name="colorSurfaceContainerLow">@color/malam_permukaan</item>
+        <item name="colorSurfaceContainer">@color/malam_permukaan_kontainer</item>
+        <item name="colorSurfaceContainerHigh">@color/malam_permukaan_tinggi</item>
+        <item name="colorSurfaceContainerHighest">@color/malam_permukaan_tertinggi</item>
+        <item name="colorSurfaceInverse">@color/malam_teks</item>
+        <item name="colorOnSurfaceInverse">@color/malam_permukaan_varian</item>
+        <item name="colorPrimaryInverse">@color/biru_utama</item>
     </style>
 
 </resources>

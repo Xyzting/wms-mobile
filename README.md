@@ -64,8 +64,18 @@ Supervisor melihat lebih sedikit menu daripada Operator. Ia dapat menyetujui
 dokumen dan menyesuaikan stok, tetapi tidak dapat membuat dokumen penerimaan
 maupun pengeluaran. Angka-angka ini dikunci oleh `MenuUtamaTest`.
 
-Di puncak Dashboard ada dua kartu ringkasan yang dapat diketuk: jumlah stok di
-bawah minimum, dan jumlah dokumen yang menunggu persetujuan.
+Di puncak Dashboard ada tiga kartu ringkasan yang dapat diketuk. Masing-masing
+menghitung satu hal dan membuka satu layar:
+
+| Kartu | Yang dihitung | Tujuan ketukan |
+|---|---|---|
+| stok menipis | stok di bawah stok minimum | Stok Gudang |
+| penerimaan menunggu | penerimaan berstatus `DRAFT` | Riwayat Penerimaan |
+| pengeluaran menunggu | pengeluaran berstatus `DRAFT` | Riwayat Pengeluaran |
+
+Penerimaan dan pengeluaran sengaja dipisah menjadi dua kartu. Satu kartu
+gabungan memaksa satu angka menunjuk ke dua layar sekaligus, sehingga separuh
+dokumen yang dihitungnya tidak pernah dapat dicapai lewat kartu itu.
 
 ## Tema, bentuk, dan mode gelap
 
@@ -166,7 +176,23 @@ Lima puluh tujuh unit test, berjalan tanpa perangkat maupun emulator.
 
 ## Tangkapan layar
 
-_Menyusul._
+Seluruh gambar diambil dari perangkat sungguhan (720 × 1544, kerapatan 320).
+
+| Masuk | Dashboard Admin | Penerimaan Barang |
+|---|---|---|
+| ![Layar masuk](docs/screenshots/01-login.png) | ![Dashboard Admin](docs/screenshots/02-dashboard-admin.png) | ![Formulir penerimaan](docs/screenshots/03-form-penerimaan.png) |
+
+| Riwayat Penerimaan | Katalog Barang | Kartu Stok |
+|---|---|---|
+| ![Riwayat penerimaan](docs/screenshots/04-riwayat-penerimaan.png) | ![Katalog barang](docs/screenshots/05-katalog-barang.png) | ![Kartu stok](docs/screenshots/06-kartu-stok.png) |
+
+| Laporan Stok | Dashboard mode gelap | Penerimaan mode gelap |
+|---|---|---|
+| ![Laporan stok](docs/screenshots/07-laporan-stok.png) | ![Dashboard gelap](docs/screenshots/08-dashboard-gelap.png) | ![Formulir penerimaan gelap](docs/screenshots/09-form-penerimaan-gelap.png) |
+
+Formulir Penerimaan Barang adalah layar Compose; sisanya adalah layar XML.
+Keduanya membaca token tema yang sama, sehingga pemisahan itu tidak terlihat
+oleh pengguna.
 
 ## Struktur
 

@@ -76,7 +76,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                     nama = pengguna.nama,
                     role = pengguna.role.namaRole,
                     stokMenipis = keadaan.stokMenipis,
-                    dokumenMenunggu = keadaan.dokumenMenunggu,
+                    penerimaanMenunggu = keadaan.penerimaanMenunggu,
+                    pengeluaranMenunggu = keadaan.pengeluaranMenunggu,
                 ),
             )
             KategoriMenu.entries.forEach { kategori ->
@@ -96,7 +97,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     private fun bukaUbin(ubin: UbinRingkasan) {
         val aksi = when (ubin) {
             UbinRingkasan.STOK_MENIPIS -> R.id.action_dashboard_to_stockList
-            UbinRingkasan.DOKUMEN_MENUNGGU -> R.id.action_dashboard_to_receiptHistory
+            UbinRingkasan.PENERIMAAN_MENUNGGU -> R.id.action_dashboard_to_receiptHistory
+            UbinRingkasan.PENGELUARAN_MENUNGGU -> R.id.action_dashboard_to_issueHistory
         }
         findNavController().navigate(aksi)
     }

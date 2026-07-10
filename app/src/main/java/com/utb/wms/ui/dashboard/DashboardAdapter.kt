@@ -61,14 +61,16 @@ class DashboardAdapter(
 
         init {
             binding.ubinStok.setOnClickListener { onUbin(UbinRingkasan.STOK_MENIPIS) }
-            binding.ubinDokumen.setOnClickListener { onUbin(UbinRingkasan.DOKUMEN_MENUNGGU) }
+            binding.ubinPenerimaan.setOnClickListener { onUbin(UbinRingkasan.PENERIMAAN_MENUNGGU) }
+            binding.ubinPengeluaran.setOnClickListener { onUbin(UbinRingkasan.PENGELUARAN_MENUNGGU) }
         }
 
         fun bind(baris: BarisDashboard.Sambutan) {
             binding.textNama.text = baris.nama
             binding.textRole.text = baris.role
             binding.textStokMenipis.text = baris.stokMenipis.toString()
-            binding.textDokumenMenunggu.text = baris.dokumenMenunggu.toString()
+            binding.textPenerimaanMenunggu.text = baris.penerimaanMenunggu.toString()
+            binding.textPengeluaranMenunggu.text = baris.pengeluaranMenunggu.toString()
         }
     }
 

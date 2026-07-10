@@ -36,6 +36,14 @@
     <color name="abu_garis">#FF8A929C</color>
     <color name="abu_garis_redup">#FFD5DAE0</color>
 
+    <color name="abu_permukaan_rendah">#FFF7F9FB</color>
+    <color name="abu_permukaan_kontainer">#FFF1F4F8</color>
+    <color name="abu_permukaan_tinggi">#FFEBEFF4</color>
+    <color name="abu_permukaan_tertinggi">#FFE5EAF0</color>
+    <color name="abu_permukaan_redup">#FFDDE2E8</color>
+    <color name="abu_permukaan_terbalik">#FF2F353B</color>
+    <color name="abu_teks_terbalik">#FFF1F3F5</color>
+
     <color name="malam_latar">#FF101418</color>
     <color name="malam_permukaan">#FF171C21</color>
     <color name="malam_permukaan_varian">#FF2A3138</color>
@@ -43,6 +51,12 @@
     <color name="malam_teks_varian">#FFB4BCC5</color>
     <color name="malam_garis">#FF6C757E</color>
     <color name="malam_garis_redup">#FF3A4149</color>
+
+    <color name="malam_permukaan_terendah">#FF0B0E12</color>
+    <color name="malam_permukaan_kontainer">#FF1B2127</color>
+    <color name="malam_permukaan_tinggi">#FF262C33</color>
+    <color name="malam_permukaan_tertinggi">#FF31383F</color>
+    <color name="malam_permukaan_terang">#FF363C43</color>
 
     <color name="latar_toolbar">#FF0B5FA5</color>
     <color name="teks_toolbar">#FFFFFFFF</color>

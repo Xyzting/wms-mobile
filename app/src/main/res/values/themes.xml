@@ -47,6 +47,17 @@
         <item name="colorOnSurfaceVariant">@color/abu_teks</item>
         <item name="colorOutline">@color/abu_garis</item>
         <item name="colorOutlineVariant">@color/abu_garis_redup</item>
+
+        <item name="colorSurfaceDim">@color/abu_permukaan_redup</item>
+        <item name="colorSurfaceBright">@color/putih</item>
+        <item name="colorSurfaceContainerLowest">@color/putih</item>
+        <item name="colorSurfaceContainerLow">@color/abu_permukaan_rendah</item>
+        <item name="colorSurfaceContainer">@color/abu_permukaan_kontainer</item>
+        <item name="colorSurfaceContainerHigh">@color/abu_permukaan_tinggi</item>
+        <item name="colorSurfaceContainerHighest">@color/abu_permukaan_tertinggi</item>
+        <item name="colorSurfaceInverse">@color/abu_permukaan_terbalik</item>
+        <item name="colorOnSurfaceInverse">@color/abu_teks_terbalik</item>
+        <item name="colorPrimaryInverse">@color/biru_terang</item>
     </style>
 
 </resources>

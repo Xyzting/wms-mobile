@@ -19,7 +19,8 @@ import kotlinx.coroutines.flow.stateIn
 data class DashboardState(
     val pengguna: User? = null,
     val stokMenipis: Int = 0,
-    val dokumenMenunggu: Int = 0,
+    val penerimaanMenunggu: Int = 0,
+    val pengeluaranMenunggu: Int = 0,
 )
 
 class DashboardViewModel(
@@ -38,7 +39,8 @@ class DashboardViewModel(
         DashboardState(
             pengguna = pengguna,
             stokMenipis = stok.count { it.dibawahMinimum },
-            dokumenMenunggu = penerimaan.size + pengeluaran.size,
+            penerimaanMenunggu = penerimaan.size,
+            pengeluaranMenunggu = pengeluaran.size,
         )
     }.stateIn(
         scope = viewModelScope,
