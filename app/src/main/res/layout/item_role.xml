@@ -8,7 +8,6 @@
     android:layout_marginBottom="12dp"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?attr/selectableItemBackground"
     style="@style/Widget.WMS.CardView">
 
     <LinearLayout
@@ -60,14 +59,14 @@
                 tools:text="1 pengguna" />
         </LinearLayout>
 
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/tombol_hapus"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:contentDescription="@string/role_hapus"
-            android:src="@drawable/ic_delete"
-            app:tint="?attr/colorError" />
+            app:icon="@drawable/ic_delete"
+            app:iconTint="?attr/colorError" />
 
     </LinearLayout>
 

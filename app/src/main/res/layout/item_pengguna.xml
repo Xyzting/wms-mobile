@@ -8,7 +8,6 @@
     android:layout_marginBottom="12dp"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?attr/selectableItemBackground"
     style="@style/Widget.WMS.CardView">
 
     <LinearLayout
