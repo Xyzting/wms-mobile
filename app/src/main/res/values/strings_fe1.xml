@@ -9,10 +9,15 @@
     <string name="login_sandi_demo">Kata sandi: nama pengguna diikuti 123</string>
 
     <string name="dashboard_sambutan">Selamat datang,</string>
-    <string name="dashboard_menu_utama">Menu Utama</string>
     <string name="dashboard_keluar">Keluar</string>
     <string name="dashboard_profil">Profil</string>
 
+    <string name="dashboard_bagian_transaksi">Transaksi</string>
+    <string name="dashboard_bagian_inventaris">Inventaris</string>
+    <string name="dashboard_bagian_administrasi">Administrasi</string>
+    <string name="dashboard_bagian_laporan">Laporan</string>
+    <string name="dashboard_stok_menipis">stok di bawah minimum</string>
+    <string name="dashboard_dokumen_menunggu">dokumen menunggu persetujuan</string>
     <string name="menu_penerimaan_judul">Penerimaan Barang</string>
     <string name="menu_penerimaan_keterangan">Catat barang masuk dari pemasok</string>
     <string name="menu_riwayat_penerimaan_judul">Riwayat Penerimaan</string>
@@ -56,6 +61,7 @@
     <string name="master_tab_pemasok">Pemasok</string>
     <string name="master_tambah">Tambah data</string>
     <string name="master_kosong">Belum ada data pada tab ini</string>
+    <string name="master_kosong_keterangan">Tambahkan barang, lokasi, atau pemasok lewat tombol tambah</string>
     <string name="master_nonaktifkan">Nonaktifkan</string>
     <string name="master_telepon">Telepon pemasok</string>
     <string name="master_nonaktif_label">Nonaktif</string>
@@ -90,6 +96,7 @@
     <string name="katalog_cari">Cari SKU atau nama barang</string>
     <string name="katalog_hasil">%1$d barang ditemukan</string>
     <string name="katalog_kosong">Tidak ada barang yang cocok</string>
+    <string name="katalog_kosong_keterangan">Ubah kata kunci pencarian</string>
     <string name="katalog_satuan">Satuan: %1$s</string>
     <string name="katalog_stok_minimum">Stok minimum: %1$d</string>
     <string name="katalog_barcode">Barcode: %1$s</string>
@@ -97,6 +104,7 @@
 
     <string name="pengguna_tambah">Tambah pengguna</string>
     <string name="pengguna_kosong">Belum ada pengguna</string>
+    <string name="pengguna_kosong_keterangan">Tambahkan pengguna lewat tombol tambah</string>
     <string name="pengguna_aktifkan">Aktifkan pengguna</string>
     <string name="pengguna_judul_tambah">Tambah Pengguna</string>
     <string name="pengguna_judul_ubah">Ubah Pengguna</string>
@@ -109,6 +117,7 @@
 
     <string name="role_tambah">Tambah role</string>
     <string name="role_kosong">Belum ada role</string>
+    <string name="role_kosong_keterangan">Tambahkan role lewat tombol tambah</string>
     <string name="role_hapus">Hapus role</string>
     <string name="role_judul_tambah">Tambah Role</string>
     <string name="role_judul_ubah">Ubah Role</string>
@@ -124,6 +133,7 @@
     <string name="laporan_tab_mutasi">Laporan Mutasi</string>
     <string name="laporan_ekspor">Ekspor laporan</string>
     <string name="laporan_kosong">Tidak ada data pada laporan ini</string>
+    <string name="laporan_kosong_keterangan">Laporan terisi setelah dokumen diposting</string>
     <string name="laporan_kosong_ekspor">Tidak ada data untuk diekspor</string>
     <string name="laporan_bagikan">Bagikan laporan lewat</string>
     <string name="laporan_tidak_ada_aplikasi">Tidak ada aplikasi untuk membagikan laporan</string>

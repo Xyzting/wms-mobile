@@ -10,11 +10,19 @@ import com.utb.wms.domain.model.bolehMengelolaMasterData
 import com.utb.wms.domain.model.bolehMengelolaPengguna
 import com.utb.wms.domain.model.bolehMenyesuaikanStok
 
+enum class KategoriMenu(@StringRes val judul: Int) {
+    TRANSAKSI(R.string.dashboard_bagian_transaksi),
+    INVENTARIS(R.string.dashboard_bagian_inventaris),
+    ADMINISTRASI(R.string.dashboard_bagian_administrasi),
+    LAPORAN(R.string.dashboard_bagian_laporan),
+}
+
 data class MenuUtama(
     @IdRes val actionId: Int,
     @DrawableRes val ikon: Int,
     @StringRes val judul: Int,
     @StringRes val keterangan: Int,
+    val kategori: KategoriMenu,
 )
 
 fun menuUntuk(pengguna: User): List<MenuUtama> = buildList {
@@ -25,6 +33,7 @@ fun menuUntuk(pengguna: User): List<MenuUtama> = buildList {
                 ikon = R.drawable.ic_arrow_downward,
                 judul = R.string.menu_penerimaan_judul,
                 keterangan = R.string.menu_penerimaan_keterangan,
+                kategori = KategoriMenu.TRANSAKSI,
             ),
         )
         add(
@@ -33,6 +42,7 @@ fun menuUntuk(pengguna: User): List<MenuUtama> = buildList {
                 ikon = R.drawable.ic_arrow_upward,
                 judul = R.string.menu_pengeluaran_judul,
                 keterangan = R.string.menu_pengeluaran_keterangan,
+                kategori = KategoriMenu.TRANSAKSI,
             ),
         )
     }
@@ -43,6 +53,7 @@ fun menuUntuk(pengguna: User): List<MenuUtama> = buildList {
             ikon = R.drawable.ic_history,
             judul = R.string.menu_riwayat_penerimaan_judul,
             keterangan = R.string.menu_riwayat_penerimaan_keterangan,
+            kategori = KategoriMenu.TRANSAKSI,
         ),
     )
     add(
@@ -51,6 +62,7 @@ fun menuUntuk(pengguna: User): List<MenuUtama> = buildList {
             ikon = R.drawable.ic_history,
             judul = R.string.menu_riwayat_pengeluaran_judul,
             keterangan = R.string.menu_riwayat_pengeluaran_keterangan,
+            kategori = KategoriMenu.TRANSAKSI,
         ),
     )
     add(
@@ -59,6 +71,7 @@ fun menuUntuk(pengguna: User): List<MenuUtama> = buildList {
             ikon = R.drawable.ic_list,
             judul = R.string.menu_stok_judul,
             keterangan = R.string.menu_stok_keterangan,
+            kategori = KategoriMenu.INVENTARIS,
         ),
     )
     add(
@@ -67,6 +80,7 @@ fun menuUntuk(pengguna: User): List<MenuUtama> = buildList {
             ikon = R.drawable.ic_assessment,
             judul = R.string.menu_kartu_stok_judul,
             keterangan = R.string.menu_kartu_stok_keterangan,
+            kategori = KategoriMenu.INVENTARIS,
         ),
     )
 
@@ -77,6 +91,7 @@ fun menuUntuk(pengguna: User): List<MenuUtama> = buildList {
                 ikon = R.drawable.ic_tune,
                 judul = R.string.menu_penyesuaian_judul,
                 keterangan = R.string.menu_penyesuaian_keterangan,
+                kategori = KategoriMenu.INVENTARIS,
             ),
         )
     }
@@ -87,6 +102,7 @@ fun menuUntuk(pengguna: User): List<MenuUtama> = buildList {
             ikon = R.drawable.ic_search,
             judul = R.string.menu_katalog_judul,
             keterangan = R.string.menu_katalog_keterangan,
+            kategori = KategoriMenu.INVENTARIS,
         ),
     )
 
@@ -97,6 +113,7 @@ fun menuUntuk(pengguna: User): List<MenuUtama> = buildList {
                 ikon = R.drawable.ic_inventory,
                 judul = R.string.menu_master_data_judul,
                 keterangan = R.string.menu_master_data_keterangan,
+                kategori = KategoriMenu.ADMINISTRASI,
             ),
         )
     }
@@ -108,6 +125,7 @@ fun menuUntuk(pengguna: User): List<MenuUtama> = buildList {
                 ikon = R.drawable.ic_group,
                 judul = R.string.menu_pengguna_judul,
                 keterangan = R.string.menu_pengguna_keterangan,
+                kategori = KategoriMenu.ADMINISTRASI,
             ),
         )
         add(
@@ -116,6 +134,7 @@ fun menuUntuk(pengguna: User): List<MenuUtama> = buildList {
                 ikon = R.drawable.ic_shield,
                 judul = R.string.menu_role_judul,
                 keterangan = R.string.menu_role_keterangan,
+                kategori = KategoriMenu.ADMINISTRASI,
             ),
         )
     }
@@ -126,6 +145,7 @@ fun menuUntuk(pengguna: User): List<MenuUtama> = buildList {
             ikon = R.drawable.ic_assessment,
             judul = R.string.menu_laporan_judul,
             keterangan = R.string.menu_laporan_keterangan,
+            kategori = KategoriMenu.LAPORAN,
         ),
     )
 }

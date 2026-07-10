@@ -40,7 +40,10 @@ class ItemCatalogFragment : Fragment(R.layout.fragment_item_catalog) {
                 viewModel.hasil.collect { daftar ->
                     adapter.submitList(daftar)
                     tampilan.textJumlah.text = getString(R.string.katalog_hasil, daftar.size)
-                    tampilan.textKosong.visibility =
+                    tampilan.kosong.ikonKosong.setImageResource(R.drawable.ic_search)
+                    tampilan.kosong.textKosongJudul.setText(R.string.katalog_kosong)
+                    tampilan.kosong.textKosongKeterangan.setText(R.string.katalog_kosong_keterangan)
+                    tampilan.kosong.root.visibility =
                         if (daftar.isEmpty()) View.VISIBLE else View.GONE
                 }
             }

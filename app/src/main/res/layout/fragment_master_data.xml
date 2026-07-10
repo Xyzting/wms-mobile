@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface">
+    android:background="?android:attr/colorBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,22 +14,17 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            style="@style/Widget.WMS.Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:navigationIconTint="?attr/colorOnPrimary"
-            app:title="@string/judul_master_data"
-            app:titleTextColor="?attr/colorOnPrimary" />
+            app:title="@string/judul_master_data" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_master"
+            style="@style/Widget.WMS.TabLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            app:tabIndicatorColor="?attr/colorOnPrimary"
-            app:tabSelectedTextColor="?attr/colorOnPrimary"
-            app:tabTextColor="?attr/colorPrimaryContainer">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -64,16 +59,13 @@
                 tools:itemCount="3"
                 tools:listitem="@layout/item_master_data" />
 
-            <TextView
-                android:id="@+id/text_kosong"
+            <include
+                android:id="@+id/kosong"
+                layout="@layout/view_empty_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/master_kosong"
-                android:textAppearance="?attr/textAppearanceBodyLarge"
-                android:textColor="?attr/colorOnSurfaceVariant"
-                android:visibility="gone"
-                tools:visibility="visible" />
+                android:visibility="gone" />
         </FrameLayout>
     </LinearLayout>
 
@@ -85,6 +77,6 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/master_tambah"
         android:src="@drawable/ic_add"
-        app:tint="?attr/colorOnPrimary" />
+        app:tint="?attr/colorOnPrimaryContainer" />
 
 </FrameLayout>

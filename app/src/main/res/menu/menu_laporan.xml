@@ -7,7 +7,7 @@
         android:id="@+id/aksi_ekspor"
         android:icon="@drawable/ic_share"
         android:title="@string/laporan_ekspor"
-        app:iconTint="?attr/colorOnPrimary"
+        app:iconTint="@color/teks_toolbar"
         app:showAsAction="ifRoom" />
 
 </menu>

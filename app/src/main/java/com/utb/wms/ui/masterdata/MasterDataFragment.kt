@@ -84,7 +84,10 @@ class MasterDataFragment : Fragment(R.layout.fragment_master_data) {
             TipeMaster.PEMASOK -> viewModel.suppliers.value.map { it.keBaris() }
         }
         adapter.submitList(baris)
-        tampilan.textKosong.visibility = if (baris.isEmpty()) View.VISIBLE else View.GONE
+        tampilan.kosong.ikonKosong.setImageResource(R.drawable.ic_inventory)
+        tampilan.kosong.textKosongJudul.setText(R.string.master_kosong)
+        tampilan.kosong.textKosongKeterangan.setText(R.string.master_kosong_keterangan)
+        tampilan.kosong.root.visibility = if (baris.isEmpty()) View.VISIBLE else View.GONE
     }
 
     private fun Item.keBaris() = BarisMaster(

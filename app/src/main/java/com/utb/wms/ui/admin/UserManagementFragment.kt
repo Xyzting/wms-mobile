@@ -45,7 +45,12 @@ class UserManagementFragment : Fragment(R.layout.fragment_user_management) {
                 launch {
                     viewModel.users.collect { daftar ->
                         adapter.submitList(daftar)
-                        tampilan.textKosong.visibility =
+                        tampilan.kosong.ikonKosong.setImageResource(R.drawable.ic_group)
+                        tampilan.kosong.textKosongJudul.setText(R.string.pengguna_kosong)
+                        tampilan.kosong.textKosongKeterangan.setText(
+                            R.string.pengguna_kosong_keterangan,
+                        )
+                        tampilan.kosong.root.visibility =
                             if (daftar.isEmpty()) View.VISIBLE else View.GONE
                     }
                 }
