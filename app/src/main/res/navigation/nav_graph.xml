@@ -119,58 +119,22 @@
 
     <fragment
         android:id="@+id/stockMovementFragment"
-        android:name="com.utb.wms.ui.common.ComingSoonFragment"
-        android:label="@string/judul_kartu_stok">
-        <argument
-            android:name="judul"
-            android:defaultValue="@string/judul_kartu_stok"
-            app:argType="reference" />
-        <argument
-            android:name="penanggungJawab"
-            android:defaultValue="FE-2"
-            app:argType="string" />
-    </fragment>
+        android:name="com.utb.wms.ui.inventory.StockMovementFragment"
+        android:label="@string/judul_kartu_stok" />
 
     <fragment
         android:id="@+id/stockAdjustmentFragment"
-        android:name="com.utb.wms.ui.common.ComingSoonFragment"
-        android:label="@string/judul_penyesuaian_stok">
-        <argument
-            android:name="judul"
-            android:defaultValue="@string/judul_penyesuaian_stok"
-            app:argType="reference" />
-        <argument
-            android:name="penanggungJawab"
-            android:defaultValue="FE-2"
-            app:argType="string" />
-    </fragment>
+        android:name="com.utb.wms.ui.inventory.StockAdjustmentFragment"
+        android:label="@string/judul_penyesuaian_stok" />
 
     <fragment
         android:id="@+id/receiptHistoryFragment"
-        android:name="com.utb.wms.ui.common.ComingSoonFragment"
-        android:label="@string/judul_riwayat_penerimaan">
-        <argument
-            android:name="judul"
-            android:defaultValue="@string/judul_riwayat_penerimaan"
-            app:argType="reference" />
-        <argument
-            android:name="penanggungJawab"
-            android:defaultValue="FE-2"
-            app:argType="string" />
-    </fragment>
+        android:name="com.utb.wms.ui.inbound.ReceiptHistoryFragment"
+        android:label="@string/judul_riwayat_penerimaan" />
 
     <fragment
         android:id="@+id/issueHistoryFragment"
-        android:name="com.utb.wms.ui.common.ComingSoonFragment"
-        android:label="@string/judul_riwayat_pengeluaran">
-        <argument
-            android:name="judul"
-            android:defaultValue="@string/judul_riwayat_pengeluaran"
-            app:argType="reference" />
-        <argument
-            android:name="penanggungJawab"
-            android:defaultValue="FE-2"
-            app:argType="string" />
-    </fragment>
+        android:name="com.utb.wms.ui.outbound.IssueHistoryFragment"
+        android:label="@string/judul_riwayat_pengeluaran" />
 
 </navigation>

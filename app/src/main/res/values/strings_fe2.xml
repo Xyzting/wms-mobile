@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="stok_jumlah">%1$d baris stok</string>
+    <string name="stok_kosong">Belum ada data stok</string>
+    <string name="stok_kosong_saring">Semua stok berada di atas minimum</string>
+    <string name="stok_saring_menipis">Di bawah minimum (%1$d)</string>
+    <string name="stok_saring_semua">Semua</string>
+    <string name="stok_minimum">Min. %1$d</string>
+    <string name="stok_nilai">%1$d %2$s</string>
+    <string name="stok_lokasi">%1$s (%2$s)</string>
+    <string name="stok_dibawah_minimum">Stok di bawah minimum</string>
+
+    <string name="mutasi_cari">Cari SKU atau nama barang</string>
+    <string name="mutasi_kosong">Belum ada mutasi stok</string>
+    <string name="mutasi_kosong_saring">Tidak ada mutasi yang cocok dengan filter</string>
+    <string name="mutasi_jumlah">%1$d mutasi</string>
+    <string name="mutasi_tipe_semua">Semua</string>
+    <string name="mutasi_tipe_masuk">Masuk</string>
+    <string name="mutasi_tipe_keluar">Keluar</string>
+    <string name="mutasi_tipe_penyesuaian">Penyesuaian</string>
+    <string name="mutasi_rincian">%1$s · %2$s</string>
+    <string name="mutasi_operator">Oleh %1$s</string>
+    <string name="mutasi_tanpa_operator">Tanpa operator</string>
+
+    <string name="sesuai_barang">Barang</string>
+    <string name="sesuai_lokasi">Lokasi</string>
+    <string name="sesuai_stok_saat_ini">Stok saat ini %1$d %2$s</string>
+    <string name="sesuai_stok_belum_dipilih">Pilih barang dan lokasi untuk melihat stok</string>
+    <string name="sesuai_jumlah_baru">Jumlah baru</string>
+    <string name="sesuai_alasan">Alasan penyesuaian</string>
+    <string name="sesuai_selisih">Selisih %1$s</string>
+    <string name="sesuai_simpan">Simpan Penyesuaian</string>
+    <string name="sesuai_berhasil">Stok %1$s disesuaikan menjadi %2$d</string>
+    <string name="sesuai_tidak_berwenang">Anda tidak berwenang menyesuaikan stok</string>
+    <string name="sesuai_sesi_berakhir">Sesi berakhir, silakan masuk kembali</string>
+    <string name="sesuai_gagal">Gagal menyimpan penyesuaian</string>
+
+    <string name="riwayat_status_semua">Semua</string>
+    <string name="riwayat_kosong_penerimaan">Belum ada penerimaan barang</string>
+    <string name="riwayat_kosong_pengeluaran">Belum ada pengeluaran barang</string>
+    <string name="riwayat_kosong_saring">Tidak ada dokumen berstatus %1$s</string>
+    <string name="riwayat_pemasok">Pemasok: %1$s</string>
+    <string name="riwayat_tujuan">Tujuan: %1$s</string>
+    <string name="riwayat_ringkasan">%1$d baris · total %2$d unit</string>
+    <string name="riwayat_operator">Dibuat oleh %1$s</string>
+    <string name="riwayat_penyetuju">Disetujui oleh %1$s</string>
+    <string name="riwayat_catatan">Catatan: %1$s</string>
+
+    <string name="status_draft">Draft</string>
+    <string name="status_validated">Disetujui</string>
+    <string name="status_posted">Diposting</string>
+    <string name="status_cancelled">Dibatalkan</string>
+
+    <string name="dokumen_setujui">Setujui</string>
+    <string name="dokumen_posting">Posting</string>
+    <string name="dokumen_batalkan">Batalkan</string>
+    <string name="dokumen_konfirmasi_posting_judul">Posting dokumen ini?</string>
+    <string name="dokumen_konfirmasi_posting_pesan">Stok gudang akan berubah dan dokumen tidak dapat diubah lagi.</string>
+    <string name="dokumen_konfirmasi_batal_judul">Batalkan dokumen ini?</string>
+    <string name="dokumen_konfirmasi_batal_pesan">Dokumen yang dibatalkan tidak dapat diaktifkan kembali.</string>
+    <string name="dokumen_konfirmasi_kembali">Kembali</string>
+    <string name="dokumen_disetujui">Dokumen disetujui</string>
+    <string name="dokumen_diposting">Dokumen diposting, stok diperbarui</string>
+    <string name="dokumen_dibatalkan">Dokumen dibatalkan</string>
+    <string name="dokumen_stok_kurang">Stok %1$s tidak mencukupi: tersedia %2$d, diminta %3$d</string>
+    <string name="dokumen_transisi_tidak_valid">Status %1$s tidak dapat diubah menjadi %2$s</string>
+    <string name="dokumen_tidak_ditemukan">Dokumen tidak ditemukan</string>
+    <string name="dokumen_tidak_berwenang">Anda tidak berwenang menyetujui dokumen</string>
+    <string name="dokumen_sesi_berakhir">Sesi berakhir, silakan masuk kembali</string>
+    <string name="dokumen_gagal">Gagal memproses dokumen</string>
+
+    <string name="pindai_prompt">Arahkan kamera ke barcode barang</string>
+    <string name="pindai_ikon">Pindai barcode</string>
+    <string name="pindai_tidak_dikenali">Barcode %1$s tidak terdaftar</string>
+    <string name="pindai_terpilih">%1$s dipilih</string>
+
+</resources>

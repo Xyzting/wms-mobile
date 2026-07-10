@@ -1,7 +1,10 @@
 package com.utb.wms.ui.inbound
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.utb.wms.domain.model.GoodsReceiptDetail
 import com.utb.wms.domain.model.Item
 import com.utb.wms.domain.model.Location
@@ -14,6 +17,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+
+sealed interface HasilPindai {
+
+    data class Terpilih(val nama: String) : HasilPindai
+
+    data class TidakDikenali(val kode: String) : HasilPindai
+}
 
 data class BarisPenerimaan(
     val id: Long,
@@ -37,6 +47,7 @@ data class GoodsReceiptState(
     val sedangMenyimpan: Boolean = false,
     val pesan: String? = null,
     val galat: String? = null,
+    val pindai: HasilPindai? = null,
 ) {
     val dapatDisimpan: Boolean
         get() = supplier != null &&
@@ -56,6 +67,8 @@ class GoodsReceiptViewModel(
     val state: StateFlow<GoodsReceiptState> = _state.asStateFlow()
 
     private var idBerikutnya = 2L
+
+    private var barisDipindai: Long? = null
 
     init {
         viewModelScope.launch {
@@ -101,6 +114,30 @@ class GoodsReceiptViewModel(
 
     fun pesanDibaca() {
         _state.update { it.copy(pesan = null, galat = null) }
+    }
+
+    fun pindaiDibaca() {
+        _state.update { it.copy(pindai = null) }
+    }
+
+    fun mulaiPindai(id: Long) {
+        barisDipindai = id
+    }
+
+    fun terapkanBarcode(kode: String?) {
+        val id = barisDipindai ?: return
+        barisDipindai = null
+        if (kode.isNullOrBlank()) return
+
+        viewModelScope.launch {
+            val item = masterDataRepository.findItemByBarcode(kode.trim())
+            if (item == null) {
+                _state.update { it.copy(pindai = HasilPindai.TidakDikenali(kode.trim())) }
+            } else {
+                ubahBaris(id) { it.copy(item = item) }
+                _state.update { it.copy(pindai = HasilPindai.Terpilih(item.nama)) }
+            }
+        }
     }
 
     fun simpan() {
@@ -166,6 +203,18 @@ class GoodsReceiptViewModel(
                 baris = keadaan.baris.map { if (it.id == id) transform(it) else it },
                 galat = null,
             )
+        }
+    }
+
+    companion object {
+        fun factory(
+            masterDataRepository: MasterDataRepository,
+            inboundRepository: InboundRepository,
+            authRepository: AuthRepository,
+        ): ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                GoodsReceiptViewModel(masterDataRepository, inboundRepository, authRepository)
+            }
         }
     }
 }
