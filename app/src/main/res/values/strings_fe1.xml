@@ -1,0 +1,144 @@
+<resources>
+
+    <string name="login_judul_aplikasi">WMS Mobile</string>
+    <string name="login_subjudul">Sistem Manajemen Gudang</string>
+    <string name="login_username">Nama pengguna</string>
+    <string name="login_password">Kata sandi</string>
+    <string name="login_masuk">Masuk</string>
+    <string name="login_akun_demo">Akun demo: admin / operator / supervisor</string>
+    <string name="login_sandi_demo">Kata sandi: nama pengguna diikuti 123</string>
+
+    <string name="dashboard_sambutan">Selamat datang,</string>
+    <string name="dashboard_menu_utama">Menu Utama</string>
+    <string name="dashboard_keluar">Keluar</string>
+    <string name="dashboard_profil">Profil</string>
+
+    <string name="menu_penerimaan_judul">Penerimaan Barang</string>
+    <string name="menu_penerimaan_keterangan">Catat barang masuk dari pemasok</string>
+    <string name="menu_riwayat_penerimaan_judul">Riwayat Penerimaan</string>
+    <string name="menu_riwayat_penerimaan_keterangan">Tinjau dan setujui dokumen masuk</string>
+    <string name="menu_pengeluaran_judul">Pengeluaran Barang</string>
+    <string name="menu_pengeluaran_keterangan">Keluarkan barang dari gudang</string>
+    <string name="menu_riwayat_pengeluaran_judul">Riwayat Pengeluaran</string>
+    <string name="menu_riwayat_pengeluaran_keterangan">Tinjau dan setujui dokumen keluar</string>
+    <string name="menu_stok_judul">Stok Gudang</string>
+    <string name="menu_stok_keterangan">Lihat saldo stok tiap lokasi</string>
+    <string name="menu_kartu_stok_judul">Kartu Stok</string>
+    <string name="menu_kartu_stok_keterangan">Telusuri pergerakan tiap barang</string>
+    <string name="menu_penyesuaian_judul">Penyesuaian Stok</string>
+    <string name="menu_penyesuaian_keterangan">Perbaiki saldo setelah stock opname</string>
+    <string name="menu_master_data_judul">Master Data</string>
+    <string name="menu_master_data_keterangan">Kelola barang, lokasi, dan pemasok</string>
+    <string name="menu_katalog_judul">Katalog Barang</string>
+    <string name="menu_katalog_keterangan">Cari barang berdasarkan SKU atau nama</string>
+    <string name="menu_pengguna_judul">Kelola Pengguna</string>
+    <string name="menu_pengguna_keterangan">Tambah dan nonaktifkan pengguna</string>
+    <string name="menu_role_judul">Kelola Role</string>
+    <string name="menu_role_keterangan">Atur peran dan kewenangan</string>
+    <string name="menu_laporan_judul">Laporan</string>
+    <string name="menu_laporan_keterangan">Laporan stok dan mutasi barang</string>
+
+    <string name="profil_nama_pengguna">Nama pengguna</string>
+    <string name="profil_peran">Peran</string>
+    <string name="profil_status">Status</string>
+    <string name="profil_aktif">Aktif</string>
+    <string name="profil_nonaktif">Nonaktif</string>
+    <string name="profil_kewenangan">Kewenangan</string>
+    <string name="profil_boleh_menyetujui">Menyetujui dokumen</string>
+    <string name="profil_boleh_master_data">Mengelola master data</string>
+    <string name="profil_boleh_pengguna">Mengelola pengguna dan role</string>
+    <string name="profil_boleh_penyesuaian">Menyesuaikan stok</string>
+    <string name="profil_boleh_dokumen">Membuat dokumen gudang</string>
+    <string name="profil_keluar">Keluar dari akun</string>
+
+    <string name="master_tab_barang">Barang</string>
+    <string name="master_tab_lokasi">Lokasi</string>
+    <string name="master_tab_pemasok">Pemasok</string>
+    <string name="master_tambah">Tambah data</string>
+    <string name="master_kosong">Belum ada data pada tab ini</string>
+    <string name="master_nonaktifkan">Nonaktifkan</string>
+    <string name="master_telepon">Telepon pemasok</string>
+    <string name="master_nonaktif_label">Nonaktif</string>
+    <string name="master_konfirmasi_judul">Nonaktifkan %1$s?</string>
+    <string name="master_konfirmasi_pesan">Data tidak dihapus, hanya disembunyikan dari layar transaksi. Riwayat dokumen lama tetap dapat dibaca.</string>
+    <string name="master_batal">Batal</string>
+    <string name="master_simpan">Simpan</string>
+    <string name="master_tersimpan">Data tersimpan</string>
+    <string name="master_dinonaktifkan">%1$s dinonaktifkan</string>
+    <string name="master_tidak_ada_aplikasi_telepon">Tidak ada aplikasi telepon di perangkat ini</string>
+
+    <string name="form_barang_judul_tambah">Tambah Barang</string>
+    <string name="form_barang_judul_ubah">Ubah Barang</string>
+    <string name="form_sku">SKU</string>
+    <string name="form_nama_barang">Nama barang</string>
+    <string name="form_satuan">Satuan</string>
+    <string name="form_stok_minimum">Stok minimum</string>
+    <string name="form_barcode">Barcode (opsional)</string>
+
+    <string name="form_lokasi_judul_tambah">Tambah Lokasi</string>
+    <string name="form_lokasi_judul_ubah">Ubah Lokasi</string>
+    <string name="form_kode_lokasi">Kode lokasi</string>
+    <string name="form_nama_lokasi">Nama lokasi</string>
+    <string name="form_kapasitas">Kapasitas</string>
+
+    <string name="form_pemasok_judul_tambah">Tambah Pemasok</string>
+    <string name="form_pemasok_judul_ubah">Ubah Pemasok</string>
+    <string name="form_kode_pemasok">Kode pemasok</string>
+    <string name="form_nama_pemasok">Nama pemasok</string>
+    <string name="form_kontak">Nomor telepon</string>
+
+    <string name="katalog_cari">Cari SKU atau nama barang</string>
+    <string name="katalog_hasil">%1$d barang ditemukan</string>
+    <string name="katalog_kosong">Tidak ada barang yang cocok</string>
+    <string name="katalog_satuan">Satuan: %1$s</string>
+    <string name="katalog_stok_minimum">Stok minimum: %1$d</string>
+    <string name="katalog_barcode">Barcode: %1$s</string>
+    <string name="katalog_tanpa_barcode">Tanpa barcode</string>
+
+    <string name="pengguna_tambah">Tambah pengguna</string>
+    <string name="pengguna_kosong">Belum ada pengguna</string>
+    <string name="pengguna_aktifkan">Aktifkan pengguna</string>
+    <string name="pengguna_judul_tambah">Tambah Pengguna</string>
+    <string name="pengguna_judul_ubah">Ubah Pengguna</string>
+    <string name="pengguna_kode">Kode pengguna</string>
+    <string name="pengguna_username">Nama pengguna</string>
+    <string name="pengguna_nama">Nama lengkap</string>
+    <string name="pengguna_password_baru">Kata sandi baru</string>
+    <string name="pengguna_password_kosong">Kosongkan bila kata sandi tidak diubah</string>
+    <string name="pengguna_role">Peran</string>
+
+    <string name="role_tambah">Tambah role</string>
+    <string name="role_kosong">Belum ada role</string>
+    <string name="role_hapus">Hapus role</string>
+    <string name="role_judul_tambah">Tambah Role</string>
+    <string name="role_judul_ubah">Ubah Role</string>
+    <string name="role_kode">Kode role</string>
+    <string name="role_nama">Nama role</string>
+    <string name="role_konfirmasi_judul">Hapus %1$s?</string>
+    <string name="role_konfirmasi_pesan">Role hanya dapat dihapus bila tidak ada pengguna yang memakainya.</string>
+    <string name="role_masih_dipakai">Role masih dipakai oleh %1$d pengguna</string>
+    <string name="role_terhapus">Role dihapus</string>
+    <string name="role_jumlah_pengguna">%1$d pengguna</string>
+
+    <string name="laporan_tab_stok">Laporan Stok</string>
+    <string name="laporan_tab_mutasi">Laporan Mutasi</string>
+    <string name="laporan_ekspor">Ekspor laporan</string>
+    <string name="laporan_kosong">Tidak ada data pada laporan ini</string>
+    <string name="laporan_kosong_ekspor">Tidak ada data untuk diekspor</string>
+    <string name="laporan_bagikan">Bagikan laporan lewat</string>
+    <string name="laporan_tidak_ada_aplikasi">Tidak ada aplikasi untuk membagikan laporan</string>
+    <string name="laporan_stok_baris">%1$d %2$s di %3$s</string>
+    <string name="laporan_stok_minimum">Minimum %1$d</string>
+    <string name="laporan_dibawah_minimum">Di bawah stok minimum</string>
+    <string name="laporan_rentang">30 hari terakhir</string>
+    <string name="laporan_mutasi_qty">%1$s %2$d %3$s</string>
+    <string name="laporan_judul_stok">Laporan Stok WMS Mobile</string>
+    <string name="laporan_judul_mutasi">Laporan Mutasi WMS Mobile</string>
+
+    <string name="umum_tersimpan">Perubahan tersimpan</string>
+    <string name="umum_hapus">Hapus</string>
+    <string name="umum_kembali">Kembali</string>
+    <string name="umum_ikon_menu">Ikon menu</string>
+    <string name="umum_buka">Buka</string>
+
+</resources>
