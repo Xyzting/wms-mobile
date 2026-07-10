@@ -43,7 +43,6 @@
     <string name="menu_laporan_judul">Laporan</string>
     <string name="menu_laporan_keterangan">Laporan stok dan mutasi barang</string>
 
-    <string name="profil_nama_pengguna">Nama pengguna</string>
     <string name="profil_peran">Peran</string>
     <string name="profil_status">Status</string>
     <string name="profil_aktif">Aktif</string>
@@ -69,7 +68,6 @@
     <string name="master_konfirmasi_pesan">Data tidak dihapus, hanya disembunyikan dari layar transaksi. Riwayat dokumen lama tetap dapat dibaca.</string>
     <string name="master_batal">Batal</string>
     <string name="master_simpan">Simpan</string>
-    <string name="master_tersimpan">Data tersimpan</string>
     <string name="master_dinonaktifkan">%1$s dinonaktifkan</string>
     <string name="master_tidak_ada_aplikasi_telepon">Tidak ada aplikasi telepon di perangkat ini</string>
 
@@ -137,18 +135,14 @@
     <string name="laporan_kosong_ekspor">Tidak ada data untuk diekspor</string>
     <string name="laporan_bagikan">Bagikan laporan lewat</string>
     <string name="laporan_tidak_ada_aplikasi">Tidak ada aplikasi untuk membagikan laporan</string>
-    <string name="laporan_stok_baris">%1$d %2$s di %3$s</string>
     <string name="laporan_stok_minimum">Minimum %1$d</string>
     <string name="laporan_dibawah_minimum">Di bawah stok minimum</string>
     <string name="laporan_rentang">30 hari terakhir</string>
-    <string name="laporan_mutasi_qty">%1$s %2$d %3$s</string>
     <string name="laporan_judul_stok">Laporan Stok WMS Mobile</string>
     <string name="laporan_judul_mutasi">Laporan Mutasi WMS Mobile</string>
 
     <string name="umum_tersimpan">Perubahan tersimpan</string>
     <string name="umum_hapus">Hapus</string>
     <string name="umum_kembali">Kembali</string>
-    <string name="umum_ikon_menu">Ikon menu</string>
-    <string name="umum_buka">Buka</string>
 
 </resources>
