@@ -16,8 +16,4 @@
     <string name="judul_kelola_pengguna">Kelola Pengguna</string>
     <string name="judul_kelola_role">Kelola Role</string>
     <string name="judul_laporan">Laporan</string>
-
-    <string name="belum_dikerjakan">Layar ini belum dikerjakan</string>
-    <string name="penanggung_jawab">Penanggung jawab: %1$s</string>
-    <string name="ikon_dalam_pengerjaan">Ikon layar dalam pengerjaan</string>
 </resources>
