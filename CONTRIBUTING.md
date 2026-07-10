@@ -75,6 +75,11 @@ memiliki `res/layout/fragment_login.xml`, dan seterusnya.
 Sejak fase 2, `ui/inventory/` berpindah dari FE-1 ke FE-2 agar seluruh layar
 yang menyentuh saldo stok berada pada satu tangan.
 
+Pada pekerjaan tampilan, BE-2 sesekali dipinjam untuk menggarap layout milik
+FE-1. Peminjaman semacam itu selalu disepakati lebih dahulu dan dibatasi pada
+berkas yang tidak sedang disentuh pemiliknya, sehingga tidak ada dua orang yang
+menulis pada berkas yang sama. Kepemilikan pada tabel di atas tetap berlaku.
+
 Seluruh destinasi `nav_graph.xml` kini menunjuk Fragment yang sesungguhnya.
 `ComingSoonFragment`, penampung sementara yang dulu mengisi destinasi yang belum
 dikerjakan, sudah dihapus.
@@ -91,9 +96,11 @@ dikerjakan, sudah dihapus.
   `res/values/` menjadi satu, jadi `R.string.*` tetap bekerja seperti biasa dan
   tidak ada dua orang yang menulis pada berkas yang sama.
 - `res/values/themes.xml`, `colors.xml`, `styles.xml`, `values-night/` — milik
-  BE-1 secara nominal, tetapi disusun oleh FE-1 pada commit fondasi tema, sekali
-  saja, sebelum pekerjaan tampilan yang lain dimulai. Sesudah itu tidak ada yang
-  menyentuhnya.
+  BE-1 secara nominal, tetapi disusun oleh FE-1 pada dua commit fondasi: commit
+  fondasi warna, lalu commit fondasi bentuk. Keduanya mendahului pekerjaan
+  tampilan yang bergantung padanya. Di luar commit fondasi, tidak ada yang
+  menyentuh berkas-berkas ini. Bila sebuah token baru dibutuhkan, mintakan
+  kepada FE-1; jangan menuliskan nilainya langsung di layout.
 - `app/build.gradle.kts` — milik BE-1. Bila sebuah pustaka baru dibutuhkan,
   mintakan kepada BE-1, jangan tambahkan sendiri.
 

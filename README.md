@@ -67,7 +67,7 @@ maupun pengeluaran. Angka-angka ini dikunci oleh `MenuUtamaTest`.
 Di puncak Dashboard ada dua kartu ringkasan yang dapat diketuk: jumlah stok di
 bawah minimum, dan jumlah dokumen yang menunggu persetujuan.
 
-## Tema dan mode gelap
+## Tema, bentuk, dan mode gelap
 
 Seluruh warna berasal dari 24 token Material 3 yang didefinisikan dua kali —
 `res/values/themes.xml` untuk mode terang dan `res/values-night/themes.xml`
@@ -87,6 +87,32 @@ Warna status dokumen membentuk tangga yang bermakna:
 | Disetujui | jingga | `colorSecondaryContainer` |
 | Diposting | hijau | `colorTertiaryContainer` |
 | Dibatalkan | merah | `colorErrorContainer` |
+
+### Bentuk
+
+Material 3 memisahkan warna, tipografi, dan bentuk menjadi tiga sistem token
+yang berdiri sendiri. Bila sistem bentuk dibiarkan kosong, setiap widget jatuh
+ke nilai bawaan pustaka — dan bawaan untuk kolom teks adalah sudut 4dp, praktis
+siku-siku. Karena itu tema mendefinisikan tangganya sendiri, dipakai bersama
+oleh lapisan XML dan lapisan Compose.
+
+| Token | Nilai | Yang memakainya |
+|---|---|---|
+| `shapeAppearanceCornerExtraSmall` | 12dp | kolom teks, dropdown, snackbar |
+| `shapeAppearanceCornerSmall` | 12dp | chip |
+| `shapeAppearanceCornerMedium` | 16dp | kartu |
+| `shapeAppearanceCornerLarge` | 16dp | tombol aksi mengambang |
+| `shapeAppearanceCornerExtraLarge` | 28dp | dialog |
+
+Tangga yang sama ditulis ulang untuk Compose pada `ui/theme/Shape.kt`, sehingga
+layar XML dan layar Compose tidak pernah berbeda bentuk. Bentuk tidak
+bergantung pada mode gelap, jadi `res/values-night/` tidak memuatnya.
+
+Tidak ada radius sudut yang ditulis langsung di layout. Chip status dan chip
+filter berbentuk pil. Dua kolom pencarian memakai
+`Widget.WMS.TextInputLayout.Pencarian` dan menjadi satu-satunya kolom teks
+tanpa label melayang — pada kolom pencarian, isinya sudah menjadi labelnya
+sendiri.
 
 Aplikasi mengikuti setelan mode gelap sistem. Tidak ada sakelar di dalam
 aplikasi.
@@ -154,7 +180,7 @@ app/src/main/java/com/utb/wms/
 │   └── repository/   implementasi kontrak repository
 ├── di/               AppContainer (dependency injection manual)
 └── ui/
-    ├── theme/        token warna dan tipografi untuk layar Compose
+    ├── theme/        token warna, tipografi, dan bentuk untuk layar Compose
     ├── common/       akses AppContainer, komponen Compose bersama, pemformat
     └── ...           Activity, Fragment, ViewModel, layar Compose
 ```
