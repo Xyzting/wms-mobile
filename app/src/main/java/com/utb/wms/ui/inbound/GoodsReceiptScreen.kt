@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -19,6 +20,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -37,29 +39,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.utb.wms.R
 import com.utb.wms.domain.model.Item
 import com.utb.wms.domain.model.Location
 import com.utb.wms.domain.model.Supplier
 import com.utb.wms.ui.common.LabeledDropdown
-import com.utb.wms.ui.common.appContainer
 import com.utb.wms.ui.theme.WMSMobileTheme
 
 @Composable
-fun GoodsReceiptRoute(onBack: () -> Unit) {
-    val container = appContainer()
-    val viewModel: GoodsReceiptViewModel = viewModel {
-        GoodsReceiptViewModel(
-            masterDataRepository = container.masterDataRepository,
-            inboundRepository = container.inboundRepository,
-            authRepository = container.authRepository,
-        )
-    }
+fun GoodsReceiptRoute(
+    viewModel: GoodsReceiptViewModel,
+    onBack: () -> Unit,
+    onPindai: (Long) -> Unit,
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     GoodsReceiptScreen(
@@ -73,6 +72,8 @@ fun GoodsReceiptRoute(onBack: () -> Unit) {
         onHapusBaris = viewModel::hapusBaris,
         onSimpan = viewModel::simpan,
         onPesanDibaca = viewModel::pesanDibaca,
+        onPindai = onPindai,
+        onPindaiDibaca = viewModel::pindaiDibaca,
     )
 }
 
@@ -89,6 +90,8 @@ fun GoodsReceiptScreen(
     onHapusBaris: (Long) -> Unit,
     onSimpan: () -> Unit,
     onPesanDibaca: () -> Unit,
+    onPindai: (Long) -> Unit,
+    onPindaiDibaca: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
@@ -98,6 +101,20 @@ fun GoodsReceiptScreen(
         if (teks != null) {
             snackbarHostState.showSnackbar(teks)
             onPesanDibaca()
+        }
+    }
+
+    val pindai = state.pindai
+    val teksPindai = when (pindai) {
+        is HasilPindai.Terpilih -> stringResource(R.string.pindai_terpilih, pindai.nama)
+        is HasilPindai.TidakDikenali -> stringResource(R.string.pindai_tidak_dikenali, pindai.kode)
+        null -> null
+    }
+
+    LaunchedEffect(teksPindai) {
+        if (teksPindai != null) {
+            snackbarHostState.showSnackbar(teksPindai)
+            onPindaiDibaca()
         }
     }
 
@@ -193,6 +210,7 @@ fun GoodsReceiptScreen(
                     onPilihLokasi = { onPilihLokasi(baris.id, it) },
                     onUbahQty = { onUbahQty(baris.id, it) },
                     onHapus = { onHapusBaris(baris.id) },
+                    onPindai = { onPindai(baris.id) },
                 )
                 Spacer(Modifier.height(12.dp))
             }
@@ -211,6 +229,7 @@ private fun KartuBarisPenerimaan(
     onPilihLokasi: (Location) -> Unit,
     onUbahQty: (String) -> Unit,
     onHapus: () -> Unit,
+    onPindai: () -> Unit,
 ) {
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -232,14 +251,25 @@ private fun KartuBarisPenerimaan(
                 }
             }
 
-            LabeledDropdown(
-                label = "Barang",
-                options = items,
-                selected = baris.item,
-                optionLabel = { "${it.nama} (${it.sku})" },
-                onSelect = onPilihItem,
-                modifier = Modifier.fillMaxWidth(),
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                LabeledDropdown(
+                    label = "Barang",
+                    options = items,
+                    selected = baris.item,
+                    optionLabel = { "${it.nama} (${it.sku})" },
+                    onSelect = onPilihItem,
+                    modifier = Modifier.weight(1f),
+                )
+
+                Spacer(Modifier.width(8.dp))
+
+                FilledTonalIconButton(onClick = onPindai) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_qr_code_scanner),
+                        contentDescription = stringResource(R.string.pindai_ikon),
+                    )
+                }
+            }
 
             Spacer(Modifier.height(12.dp))
 
@@ -295,6 +325,8 @@ private fun GoodsReceiptScreenPreview() {
             onHapusBaris = {},
             onSimpan = {},
             onPesanDibaca = {},
+            onPindai = {},
+            onPindaiDibaca = {},
         )
     }
 }
