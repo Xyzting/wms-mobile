@@ -5,7 +5,7 @@ OOAD (UAS OOAD, WMS). Dibangun dengan **Kotlin Native**, arsitektur
 **MVVM + Repository**, dan persistensi **Room**.
 
 Lapisan tampilan memakai `AppCompatActivity` tunggal, `Fragment` di bawah
-Navigation Component, dan `RecyclerView` untuk seluruh daftar. Sebagian layar
+Navigation Component, dan `RecyclerView` untuk seluruh daftar. Tiga layar
 formulir digambar dengan Jetpack Compose melalui `ComposeView`.
 
 ## Tautan
@@ -22,24 +22,25 @@ tautannya siap.
 
 ## Fitur
 
-Mengikuti Use Case Diagram pada dokumen OOAD: 21 use case, 4 aktor.
+Mengikuti Use Case Diagram pada dokumen OOAD: 21 use case, 4 aktor. Seluruhnya
+sudah diimplementasikan.
 
 | Paket | Use case | Status |
 |---|---|---|
 | Autentikasi | Login, Logout | ✅ |
-| | View Profile | ⏳ |
-| Master Data | Manage Master Data (item, lokasi, pemasok) | ⏳ |
-| | Search Item, View Item Catalog | ⏳ |
-| Administrasi | Manage Users, Manage Roles | ⏳ |
+| | View Profile | ✅ |
+| Master Data | Manage Master Data (item, lokasi, pemasok) | ✅ |
+| | Search Item, View Item Catalog | ✅ |
+| Administrasi | Manage Users, Manage Roles | ✅ |
 | Inbound | Create Goods Receipt | ✅ |
-| | Approve Goods Receipt, View Receipt History | ⏳ |
-| | Scan Barcode | ⏳ |
+| | Approve Goods Receipt, View Receipt History | ✅ |
+| | Scan Barcode | ✅ |
 | Outbound | Create Goods Issue | ✅ |
-| | Approve Goods Issue, View Issue History | ⏳ |
+| | Approve Goods Issue, View Issue History | ✅ |
 | Inventory | View Stock | ✅ |
-| | View Stock Movement, Stock Adjustment | ⏳ |
-| Reporting | Generate Stock Report, Generate Mutation Report | ⏳ |
-| | Export Report | ⏳ |
+| | View Stock Movement, Stock Adjustment | ✅ |
+| Reporting | Generate Stock Report, Generate Mutation Report | ✅ |
+| | Export Report | ✅ |
 
 Dokumen penerimaan dan pengeluaran barang mengikuti siklus
 **Draft → Validated → Posted**, dan dapat dibatalkan selama belum `Posted`.
@@ -47,8 +48,48 @@ Stok hanya bergerak pada saat dokumen `Posted`. Seluruh pergerakan ditulis
 dalam satu transaksi basis data, dan pengeluaran memeriksa ketersediaan seluruh
 baris sebelum menulis apa pun, sehingga stok tidak pernah menjadi minus.
 
-Menu yang tampil pada Dashboard disaring berdasarkan role pengguna. Operator
-tidak melihat menu persetujuan maupun administrasi.
+### Menu per peran
+
+Dashboard menampilkan menu sebagai grid dua kolom yang dikelompokkan menjadi
+empat kategori: Transaksi, Inventaris, Administrasi, dan Laporan. Kategori yang
+kosong disembunyikan. Menu yang tampil disaring berdasarkan role pengguna.
+
+| Peran | Jumlah menu | Kategori terisi | Yang tidak dilihat |
+|---|---|---|---|
+| Admin | 12 | 4 | — |
+| Operator | 8 | 3 | administrasi, penyesuaian stok |
+| Supervisor | 7 | 3 | administrasi, pembuatan dokumen |
+
+Supervisor melihat lebih sedikit menu daripada Operator. Ia dapat menyetujui
+dokumen dan menyesuaikan stok, tetapi tidak dapat membuat dokumen penerimaan
+maupun pengeluaran. Angka-angka ini dikunci oleh `MenuUtamaTest`.
+
+Di puncak Dashboard ada dua kartu ringkasan yang dapat diketuk: jumlah stok di
+bawah minimum, dan jumlah dokumen yang menunggu persetujuan.
+
+## Tema dan mode gelap
+
+Seluruh warna berasal dari 24 token Material 3 yang didefinisikan dua kali —
+`res/values/themes.xml` untuk mode terang dan `res/values-night/themes.xml`
+untuk mode gelap. Layar Compose memakai token yang sama lewat `ui/theme/Theme.kt`,
+sehingga layar XML dan layar Compose tidak pernah berbeda warna.
+
+Latar toolbar sengaja tidak diambil dari `colorPrimary`, melainkan dari sumber
+daya tersendiri `@color/latar_toolbar`. Alasannya, `colorPrimary` harus gelap
+bila dipakai sebagai latar dan terang bila dipakai sebagai aksen — dua peran yang
+saling bertentangan begitu mode gelap dinyalakan.
+
+Warna status dokumen membentuk tangga yang bermakna:
+
+| Status | Warna | Token |
+|---|---|---|
+| Draft | abu-abu | `colorSurfaceVariant` |
+| Disetujui | jingga | `colorSecondaryContainer` |
+| Diposting | hijau | `colorTertiaryContainer` |
+| Dibatalkan | merah | `colorErrorContainer` |
+
+Aplikasi mengikuti setelan mode gelap sistem. Tidak ada sakelar di dalam
+aplikasi.
 
 ## Cara clone dan menjalankan
 
@@ -84,6 +125,19 @@ Yang dibutuhkan hanya **JDK 17** dan **Android SDK API 34**.
 Data contoh dimuat otomatis saat aplikasi pertama kali dijalankan: enam item,
 empat lokasi, tiga pemasok.
 
+## Pengujian
+
+Lima puluh tujuh unit test, berjalan tanpa perangkat maupun emulator.
+
+| Berkas | Yang diuji |
+|---|---|
+| `InboundRepositoryTest` | siklus dokumen penerimaan, pergerakan stok saat posting |
+| `OutboundRepositoryTest` | siklus dokumen pengeluaran, penolakan saat stok kurang |
+| `InventoryRepositoryTest` | saldo stok, penyesuaian, kartu stok |
+| `UserRepositoryTest` | autentikasi, pengelolaan pengguna dan role |
+| `MenuUtamaTest` | komposisi menu Dashboard untuk ketiga peran |
+| `DokumenUiTest` | wewenang aksi dokumen, pemetaan hasil operasi |
+
 ## Tangkapan layar
 
 _Menyusul._
@@ -99,7 +153,10 @@ app/src/main/java/com/utb/wms/
 │   ├── local/        Room: entity, DAO, relasi, mapper, seeder
 │   └── repository/   implementasi kontrak repository
 ├── di/               AppContainer (dependency injection manual)
-└── ui/               Activity, Fragment, ViewModel, layar Compose
+└── ui/
+    ├── theme/        token warna dan tipografi untuk layar Compose
+    ├── common/       akses AppContainer, komponen Compose bersama, pemformat
+    └── ...           Activity, Fragment, ViewModel, layar Compose
 ```
 
 Aturan ketergantungan: `ui/` dan `data/` sama-sama bergantung pada `domain/`.
@@ -111,8 +168,11 @@ Paket `ui/` **tidak boleh** mengimpor `data/`.
 |---|---|
 | `Activity` | `MainActivity.kt` |
 | `Fragment` | `ui/login/LoginFragment.kt` dan seluruh layar lain |
-| `RecyclerView` | daftar stok, riwayat dokumen, katalog item |
+| `RecyclerView` | Dashboard, daftar stok, riwayat dokumen, katalog item |
 | `Intent` | `ACTION_SEND` untuk ekspor laporan, `ACTION_DIAL` untuk kontak pemasok |
+
+Pemindai barcode memakai `zxing-android-embedded` lewat `ScanContract`, sebuah
+`ActivityResultContract` yang mengurus izin kamera sendiri.
 
 ## Pembagian kerja tim
 

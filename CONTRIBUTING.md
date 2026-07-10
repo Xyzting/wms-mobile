@@ -64,7 +64,7 @@ Setiap berkas dimiliki satu peran. **Jangan mengubah berkas milik peran lain.**
 
 | Peran | Anggota                   | Berkas                                                                                                                                                        |
 | ----- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| BE-1  | Reyhan Fathir Alamsyah    | konfigurasi Gradle, `gradlew*`, `AndroidManifest.xml`, `MainActivity.kt`, `WmsApplication.kt`, `di/`, `domain/`, `data/local/`, `res/navigation/`, `res/values/`, `ui/common/AppContainerAccess.kt`, `ui/common/ComingSoonFragment.kt`, dokumentasi |
+| BE-1  | Reyhan Fathir Alamsyah    | konfigurasi Gradle, `gradlew*`, `AndroidManifest.xml`, `MainActivity.kt`, `WmsApplication.kt`, `di/`, `domain/`, `data/local/`, `res/navigation/`, `res/values/`, `ui/common/AppContainerAccess.kt`, dokumentasi |
 | BE-2  | Nazka Yasir Alman Paluthi | `data/repository/*Impl.kt`, `app/src/test/`                                                                                                                   |
 | FE-1  | M. Hafizul Hadi           | `ui/theme/`, `ui/login/`, `ui/dashboard/`, `ui/profile/`, `ui/masterdata/`, `ui/catalog/`, `ui/admin/`, `ui/report/`                                          |
 | FE-2  | Radhitias Salman Syam     | `ui/common/Components.kt`, `ui/inventory/`, `ui/inbound/`, `ui/outbound/`                                                                                     |
@@ -75,18 +75,25 @@ memiliki `res/layout/fragment_login.xml`, dan seterusnya.
 Sejak fase 2, `ui/inventory/` berpindah dari FE-1 ke FE-2 agar seluruh layar
 yang menyentuh saldo stok berada pada satu tangan.
 
+Seluruh destinasi `nav_graph.xml` kini menunjuk Fragment yang sesungguhnya.
+`ComingSoonFragment`, penampung sementara yang dulu mengisi destinasi yang belum
+dikerjakan, sudah dihapus.
+
 ### Pengecualian yang diizinkan
 
-- `res/navigation/nav_graph.xml` — milik BE-1, namun setiap peran FE mengganti
-  `android:name` pada destinasi miliknya sendiri, dari `ComingSoonFragment`
-  menjadi Fragment yang sesungguhnya, lalu menghapus dua `<argument>` bawaan
-  destinasi tersebut. Destinasi sudah diurutkan agar milik FE-1 dan FE-2 tidak
-  bersebelahan, sehingga Git dapat menggabungkannya otomatis.
+- `res/navigation/nav_graph.xml` — milik BE-1. Destinasi sudah diurutkan agar
+  milik FE-1 dan FE-2 tidak bersebelahan, sehingga Git dapat menggabungkannya
+  otomatis. Kini seluruh destinasi sudah terisi; berkas ini tidak perlu diubah
+  lagi.
 - `res/values/strings.xml` — **jangan disentuh peran FE.** Tulis teks baru pada
   berkas sendiri: FE-1 memakai `res/values/strings_fe1.xml`, FE-2 memakai
   `res/values/strings_fe2.xml`. Android menggabungkan seluruh berkas di
   `res/values/` menjadi satu, jadi `R.string.*` tetap bekerja seperti biasa dan
   tidak ada dua orang yang menulis pada berkas yang sama.
+- `res/values/themes.xml`, `colors.xml`, `styles.xml`, `values-night/` — milik
+  BE-1 secara nominal, tetapi disusun oleh FE-1 pada commit fondasi tema, sekali
+  saja, sebelum pekerjaan tampilan yang lain dimulai. Sesudah itu tidak ada yang
+  menyentuhnya.
 - `app/build.gradle.kts` — milik BE-1. Bila sebuah pustaka baru dibutuhkan,
   mintakan kepada BE-1, jangan tambahkan sendiri.
 

@@ -30,10 +30,15 @@ sandinya di `local.properties`, jangan di `build.gradle.kts`.
 
 ## Kapan dibuat
 
-**Paling akhir**, setelah seluruh Pull Request digabungkan ke `main`. APK yang
-dibuat sekarang masih memuat layar berpenanda «Segera hadir» dan pemanggilan
-repository yang belum terisi. Buat ulang sebelum mengumpulkan.
+**Paling akhir**, setelah seluruh Pull Request digabungkan ke `main`. Seluruh
+layar kini sudah terisi, jadi APK yang dibuat dari `main` sudah utuh.
 
 Sebelum menyalin APK ke sini, pasang dulu di perangkat sungguhan dan telusuri
-setiap menu. Ketentuan UAS menyebut aplikasi yang mengalami force close akan
-mengurangi nilai secara signifikan.
+setiap menu, di mode terang **dan** mode gelap. Ketentuan UAS menyebut aplikasi
+yang mengalami force close akan mengurangi nilai secara signifikan.
+
+```bash
+adb install -r apk/app-release.apk
+adb shell cmd uimode night yes     # telusuri mode gelap
+adb shell cmd uimode night auto    # kembalikan setelah selesai
+```
