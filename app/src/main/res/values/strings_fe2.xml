@@ -4,6 +4,7 @@
     <string name="stok_jumlah">%1$d baris stok</string>
     <string name="stok_kosong">Belum ada data stok</string>
     <string name="stok_kosong_saring">Semua stok berada di atas minimum</string>
+    <string name="stok_kosong_keterangan">Stok muncul setelah dokumen penerimaan diposting</string>
     <string name="stok_saring_menipis">Di bawah minimum (%1$d)</string>
     <string name="stok_saring_semua">Semua</string>
     <string name="stok_minimum">Min. %1$d</string>
@@ -14,6 +15,7 @@
     <string name="mutasi_cari">Cari SKU atau nama barang</string>
     <string name="mutasi_kosong">Belum ada mutasi stok</string>
     <string name="mutasi_kosong_saring">Tidak ada mutasi yang cocok dengan filter</string>
+    <string name="mutasi_kosong_keterangan">Mutasi tercatat setelah dokumen diposting atau stok disesuaikan</string>
     <string name="mutasi_jumlah">%1$d mutasi</string>
     <string name="mutasi_tipe_semua">Semua</string>
     <string name="mutasi_tipe_masuk">Masuk</string>
@@ -40,6 +42,7 @@
     <string name="riwayat_kosong_penerimaan">Belum ada penerimaan barang</string>
     <string name="riwayat_kosong_pengeluaran">Belum ada pengeluaran barang</string>
     <string name="riwayat_kosong_saring">Tidak ada dokumen berstatus %1$s</string>
+    <string name="riwayat_kosong_keterangan">Dokumen muncul di sini setelah dibuat</string>
     <string name="riwayat_pemasok">Pemasok: %1$s</string>
     <string name="riwayat_tujuan">Tujuan: %1$s</string>
     <string name="riwayat_ringkasan">%1$d baris · total %2$d unit</string>

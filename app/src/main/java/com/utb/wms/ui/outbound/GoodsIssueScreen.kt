@@ -37,12 +37,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.utb.wms.R
 import com.utb.wms.domain.model.Item
 import com.utb.wms.domain.model.Location
 import com.utb.wms.ui.common.LabeledDropdown
@@ -108,9 +110,9 @@ fun GoodsIssueScreen(
             TopAppBar(
                 title = { Text("Pengeluaran Barang") },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
-                    navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
+                    containerColor = colorResource(R.color.latar_toolbar),
+                    titleContentColor = colorResource(R.color.teks_toolbar),
+                    navigationIconContentColor = colorResource(R.color.teks_toolbar),
                 ),
                 navigationIcon = {
                     IconButton(onClick = onBack) {

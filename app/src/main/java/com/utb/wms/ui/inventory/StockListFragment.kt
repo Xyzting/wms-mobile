@@ -42,14 +42,16 @@ class StockListFragment : Fragment(R.layout.fragment_stock_list) {
                         getString(R.string.stok_jumlah, keadaan.baris.size)
                     tampilan.chipMenipis.text =
                         getString(R.string.stok_saring_menipis, keadaan.jumlahMenipis)
-                    tampilan.textKosong.setText(
+                    tampilan.kosong.ikonKosong.setImageResource(R.drawable.ic_list)
+                    tampilan.kosong.textKosongJudul.setText(
                         if (keadaan.hanyaMenipis) {
                             R.string.stok_kosong_saring
                         } else {
                             R.string.stok_kosong
                         },
                     )
-                    tampilan.textKosong.visibility =
+                    tampilan.kosong.textKosongKeterangan.setText(R.string.stok_kosong_keterangan)
+                    tampilan.kosong.root.visibility =
                         if (keadaan.baris.isEmpty()) View.VISIBLE else View.GONE
                 }
             }

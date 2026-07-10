@@ -50,8 +50,13 @@ abstract class DocumentHistoryFragment : Fragment(R.layout.fragment_document_his
                 launch {
                     viewModel.baris.collect { daftar ->
                         adapter.submitList(daftar)
-                        tampilan.textKosong.text = teksKosongUntuk(viewModel.status.value)
-                        tampilan.textKosong.visibility =
+                        tampilan.kosong.ikonKosong.setImageResource(R.drawable.ic_history)
+                        tampilan.kosong.textKosongJudul.text =
+                            teksKosongUntuk(viewModel.status.value)
+                        tampilan.kosong.textKosongKeterangan.setText(
+                            R.string.riwayat_kosong_keterangan,
+                        )
+                        tampilan.kosong.root.visibility =
                             if (daftar.isEmpty()) View.VISIBLE else View.GONE
                     }
                 }

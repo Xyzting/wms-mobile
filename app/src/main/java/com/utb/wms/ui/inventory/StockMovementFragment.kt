@@ -45,14 +45,16 @@ class StockMovementFragment : Fragment(R.layout.fragment_stock_movement) {
                     adapter.submitList(keadaan.baris)
                     tampilan.textJumlah.text =
                         getString(R.string.mutasi_jumlah, keadaan.baris.size)
-                    tampilan.textKosong.setText(
+                    tampilan.kosong.ikonKosong.setImageResource(R.drawable.ic_assessment)
+                    tampilan.kosong.textKosongJudul.setText(
                         if (keadaan.menyaring) {
                             R.string.mutasi_kosong_saring
                         } else {
                             R.string.mutasi_kosong
                         },
                     )
-                    tampilan.textKosong.visibility =
+                    tampilan.kosong.textKosongKeterangan.setText(R.string.mutasi_kosong_keterangan)
+                    tampilan.kosong.root.visibility =
                         if (keadaan.baris.isEmpty()) View.VISIBLE else View.GONE
                 }
             }

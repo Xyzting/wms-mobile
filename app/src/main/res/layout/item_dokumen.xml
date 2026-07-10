@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="1dp">
+    style="@style/Widget.WMS.CardView">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,14 +30,10 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_status"
-                style="@style/Widget.Material3.Chip.Assist"
+                style="@style/Widget.WMS.Chip.Status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:checkable="false"
-                android:clickable="false"
-                app:chipStrokeWidth="0dp"
-                app:ensureMinTouchTargetSize="false"
                 tools:text="Draft" />
         </LinearLayout>
 

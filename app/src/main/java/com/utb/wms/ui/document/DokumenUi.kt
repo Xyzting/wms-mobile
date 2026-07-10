@@ -71,7 +71,7 @@ fun DocumentStatus.labelRes(): Int = when (this) {
 fun DocumentStatus.warnaLatarAttr(): Int = when (this) {
     DocumentStatus.DRAFT -> com.google.android.material.R.attr.colorSurfaceVariant
     DocumentStatus.VALIDATED -> com.google.android.material.R.attr.colorSecondaryContainer
-    DocumentStatus.POSTED -> com.google.android.material.R.attr.colorPrimaryContainer
+    DocumentStatus.POSTED -> com.google.android.material.R.attr.colorTertiaryContainer
     DocumentStatus.CANCELLED -> com.google.android.material.R.attr.colorErrorContainer
 }
 
@@ -79,6 +79,6 @@ fun DocumentStatus.warnaLatarAttr(): Int = when (this) {
 fun DocumentStatus.warnaTeksAttr(): Int = when (this) {
     DocumentStatus.DRAFT -> com.google.android.material.R.attr.colorOnSurfaceVariant
     DocumentStatus.VALIDATED -> com.google.android.material.R.attr.colorOnSecondaryContainer
-    DocumentStatus.POSTED -> com.google.android.material.R.attr.colorOnPrimaryContainer
+    DocumentStatus.POSTED -> com.google.android.material.R.attr.colorOnTertiaryContainer
     DocumentStatus.CANCELLED -> com.google.android.material.R.attr.colorOnErrorContainer
 }
