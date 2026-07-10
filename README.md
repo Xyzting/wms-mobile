@@ -12,13 +12,12 @@ formulir digambar dengan Jetpack Compose melalui `ComposeView`.
 
 | Sumber | Tautan |
 |---|---|
-| Video demo aplikasi | _belum tersedia_ |
+| Video demo aplikasi | __ |
 | Dokumen desain OOAD | [Buka di Google Docs](https://docs.google.com/document/d/1bBeJVVsAAmToXrQMYOm4iHlNcDzRNlTU/edit?usp=sharing) |
 | Laporan OOAD (PDF) | [docs/UAS_OOAD_WMS.pdf](docs/UAS_OOAD_WMS.pdf) |
 | Berkas rilis | [apk/](apk/) |
 
-Ganti baris video demo dengan format `[Tonton di YouTube](https://...)` setelah
-tautannya siap.
+
 
 ## Fitur
 
