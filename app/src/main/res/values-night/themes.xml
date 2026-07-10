@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.WMSMobile" parent="Base.WMSMobile">
+        <item name="colorPrimary">@color/biru_terang</item>
+        <item name="colorOnPrimary">@color/biru_gelap</item>
+        <item name="colorPrimaryContainer">@color/biru_kontainer_gelap</item>
+        <item name="colorOnPrimaryContainer">@color/biru_kontainer</item>
+
+        <item name="colorSecondary">@color/jingga_terang</item>
+        <item name="colorOnSecondary">@color/jingga_gelap</item>
+        <item name="colorSecondaryContainer">@color/jingga_kontainer_gelap</item>
+        <item name="colorOnSecondaryContainer">@color/jingga_kontainer</item>
+
+        <item name="colorTertiary">@color/hijau_terang</item>
+        <item name="colorOnTertiary">@color/hijau_paling_gelap</item>
+        <item name="colorTertiaryContainer">@color/hijau_kontainer_gelap</item>
+        <item name="colorOnTertiaryContainer">@color/hijau_kontainer</item>
+
+        <item name="colorError">@color/merah_terang</item>
+        <item name="colorOnError">@color/merah_gelap</item>
+        <item name="colorErrorContainer">@color/merah_kontainer_gelap</item>
+        <item name="colorOnErrorContainer">@color/merah_kontainer</item>
+
+        <item name="android:colorBackground">@color/malam_latar</item>
+        <item name="colorOnBackground">@color/malam_teks</item>
+        <item name="colorSurface">@color/malam_permukaan</item>
+        <item name="colorOnSurface">@color/malam_teks</item>
+        <item name="colorSurfaceVariant">@color/malam_permukaan_varian</item>
+        <item name="colorOnSurfaceVariant">@color/malam_teks_varian</item>
+        <item name="colorOutline">@color/malam_garis</item>
+        <item name="colorOutlineVariant">@color/malam_garis_redup</item>
+    </style>
+
+</resources>
