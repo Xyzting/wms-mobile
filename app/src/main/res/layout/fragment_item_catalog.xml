@@ -17,18 +17,18 @@
         app:title="@string/judul_katalog_barang" />
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        style="@style/Widget.WMS.TextInputLayout.Pencarian"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-        android:hint="@string/katalog_cari"
         app:startIconDrawable="@drawable/ic_search">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_cari"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/katalog_cari"
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1" />
