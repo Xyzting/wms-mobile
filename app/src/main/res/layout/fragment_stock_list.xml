@@ -5,18 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:background="?android:attr/colorBackground"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
+        style="@style/Widget.WMS.Toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:navigationIconTint="?attr/colorOnPrimary"
-        app:title="@string/judul_stok"
-        app:titleTextColor="?attr/colorOnPrimary" />
+        app:title="@string/judul_stok" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/grup_saring"
@@ -71,16 +69,13 @@
             tools:itemCount="4"
             tools:listitem="@layout/item_stok" />
 
-        <TextView
-            android:id="@+id/text_kosong"
+        <include
+            android:id="@+id/kosong"
+            layout="@layout/view_empty_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/stok_kosong"
-            android:textAppearance="?attr/textAppearanceBodyLarge"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            android:visibility="gone" />
     </FrameLayout>
 
 </LinearLayout>
