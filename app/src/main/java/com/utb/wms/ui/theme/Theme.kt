@@ -68,6 +68,7 @@ fun WMSMobileTheme(
     MaterialTheme(
         colorScheme = if (gunakanTemaGelap) SkemaGelap else SkemaTerang,
         typography = WmsTypography,
+        shapes = WmsShapes,
         content = content,
     )
 }

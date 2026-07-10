@@ -8,6 +8,12 @@
         <item name="textAppearanceTitleMedium">@style/TextAppearance.WMS.TitleMedium</item>
         <item name="textAppearanceLabelLarge">@style/TextAppearance.WMS.LabelLarge</item>
 
+        <item name="shapeAppearanceCornerExtraSmall">@style/ShapeAppearance.WMS.Corner.ExtraSmall</item>
+        <item name="shapeAppearanceCornerSmall">@style/ShapeAppearance.WMS.Corner.Small</item>
+        <item name="shapeAppearanceCornerMedium">@style/ShapeAppearance.WMS.Corner.Medium</item>
+        <item name="shapeAppearanceCornerLarge">@style/ShapeAppearance.Material3.Corner.Large</item>
+        <item name="shapeAppearanceCornerExtraLarge">@style/ShapeAppearance.Material3.Corner.ExtraLarge</item>
+
         <item name="android:statusBarColor">@color/latar_toolbar</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
     </style>
