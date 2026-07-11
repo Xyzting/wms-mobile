@@ -12,7 +12,7 @@ formulir digambar dengan Jetpack Compose melalui `ComposeView`.
 
 | Sumber | Tautan |
 |---|---|
-| Video demo aplikasi | __ |
+| Video demo aplikasi | https://drive.google.com/drive/u/0/folders/1ILAgGMi1evPY1RPioF806FjwYhpe6-9D |
 | Dokumen desain OOAD | [Buka di Google Docs](https://docs.google.com/document/d/1bBeJVVsAAmToXrQMYOm4iHlNcDzRNlTU/edit?usp=sharing) |
 | Laporan OOAD (PDF) | [docs/UAS_OOAD_WMS.pdf](docs/UAS_OOAD_WMS.pdf) |
 | Berkas rilis | [apk/](apk/) |
